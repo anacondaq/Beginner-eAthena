@@ -1,0 +1,923 @@
+Index: db/packet_db.txt
+===================================================================
+--- db/packet_db.txt	(revision 14369)
++++ db/packet_db.txt	(working copy)
+@@ -8,8 +8,8 @@
+ // Main packet version of the DB to use (default = max available version)
+ // Client detection is faster when all clients use this version.
+ // Version 23 is the latest Sakexe (above versions are for Renewal clients)
+-packet_db_ver: 23
+-//packet_db_ver: default
++//packet_db_ver: 23
++packet_db_ver: default
+ 
+ 
+ packet_ver: 5
+@@ -56,7 +56,7 @@
+ 0x008c,-1,globalmessage,2:4
+ 0x008d,-1
+ 0x008e,-1
+-//0x008f,0
++//0x008f,-1
+ 0x0090,7,npcclicked,2
+ 0x0091,22
+ 0x0092,28
+@@ -86,7 +86,7 @@
+ 0x00aa,7
+ 0x00ab,4,unequipitem,2
+ 0x00ac,7
+-//0x00ad,0
++//0x00ad,-1
+ 0x00ae,-1
+ 0x00af,6
+ 0x00b0,8
+@@ -303,7 +303,7 @@
+ 0x0183,10,guilddelalliance,2:6
+ 0x0184,10
+ 0x0185,34
+-//0x0186,0
++//0x0186,-1
+ 0x0187,6
+ 0x0188,8
+ 0x0189,4
+@@ -371,7 +371,7 @@
+ 0x01c7,2
+ 0x01c8,13
+ 0x01c9,97
+-//0x01ca,0
++//0x01ca,-1
+ 0x01cb,9
+ 0x01cc,9
+ 0x01cd,30
+@@ -436,8 +436,8 @@
+ 0x0208,11,friendslistreply,2:6:10
+ 0x0209,36
+ 0x020a,10
+-//0x020b,0
+-//0x020c,0
++//0x020b,-1
++//0x020c,-1
+ 0x020d,-1
+ 
+ //2004-07-05aSakexe
+@@ -733,7 +733,7 @@
+ 0x0113,33,useskilltopos,12:15:18:31
+ 0x0116,12,dropitem,3:10
+ 0x0190,24,actionrequest,11:23
+-0x0216,0
++0x0216,-1
+ 0x023d,-1
+ 0x023e,4
+ 
+@@ -810,7 +810,7 @@
+ 0x0240,-1
+ 0x0248,-1,mailsend,2:4:28:68
+ 0x0255,5
+-0x0256,0
++0x0256,-1
+ 0x0257,8
+ 
+ //2005-09-12bSakexe
+@@ -933,8 +933,8 @@
+ 0x029d,-1
+ 0x029e,11
+ 0x029f,3,mermenu,0
+-0x02a0,0
+-0x02a1,0
++0x02a0,-1
++0x02a1,-1
+ 0x02a2,8
+ 
+ //2007-01-08aSakexe
+@@ -961,8 +961,8 @@
+ 
+ //2007-01-29aSakexe
+ 0x029b,72
+-0x02a3,0
+-0x02a4,0
++0x02a3,-1
++0x02a4,-1
+ 0x02a5,8
+ 
+ // 2007-02-05aSakexe
+@@ -1082,8 +1082,8 @@
+ 0x02ef,8
+ 
+ //2008-03-18aSakexe
+-0x02bf,0
+-0x02c0,0
++0x02bf,-1
++0x02c0,-1
+ 0x02f0,10
+ 0x02f1,2,progressbar,0
+ 0x02f2,2
+@@ -1408,7 +1408,7 @@
+ 
+ //2009-09-29aRagexeRE
+ //0x07ea,2
+-//0x07eb,0
++//0x07eb,-1
+ //0x07ec,6
+ //0x07ed,8
+ //0x07ee,6
+@@ -1431,9 +1431,9 @@
+ 0x07f6,14
+ 
+ //2009-11-03aRagexeRE
+-//0x07f7,0
+-//0x07f8,0
+-//0x07f9,0
++0x07f7,-1
++0x07f8,-1
++0x07f9,-1
+ 
+ //2009-11-17aRagexeRE
+ //0x07fa,-1
+Index: src/char/char.c
+===================================================================
+--- src/char/char.c	(revision 14369)
++++ src/char/char.c	(working copy)
+@@ -726,6 +726,7 @@
+ 	p->hom_id = tmp_int[44];
+ 	p->last_point.map = tmp_int[45];
+ 	p->save_point.map = tmp_int[46];
++	memcpy(p->last_map, tmp_str[1], MAP_NAME_LENGTH_EXT);
+ 
+ #ifndef TXT_SQL_CONVERT
+ 	// Some checks
+@@ -790,7 +791,7 @@
+ 			p->inventory[i].refine = tmp_int[5];
+ 			p->inventory[i].attribute = tmp_int[6];
+ 
+-			for(j = 0; j < MAX_SLOTS && tmp_str[0][0] && sscanf(tmp_str[0], ",%d%[0-9,-]",&tmp_int[0], tmp_str[0]) > 0; j++)
++			for(j = 0; j < MAX_SLOTS && tmp_str[0] && sscanf(tmp_str[0], ",%d%[0-9,-]",&tmp_int[0], tmp_str[0]) > 0; j++)
+ 				p->inventory[i].card[j] = tmp_int[0];
+ 
+ 			next += len;
+@@ -814,7 +815,7 @@
+ 			p->cart[i].refine = tmp_int[5];
+ 			p->cart[i].attribute = tmp_int[6];
+ 			
+-			for(j = 0; j < MAX_SLOTS && tmp_str[0][0] && sscanf(tmp_str[0], ",%d%[0-9,-]",&tmp_int[0], tmp_str[0]) > 0; j++)
++			for(j = 0; j < MAX_SLOTS && tmp_str && sscanf(tmp_str[0], ",%d%[0-9,-]",&tmp_int[0], tmp_str[0]) > 0; j++)
+ 				p->cart[i].card[j] = tmp_int[0];
+ 			
+ 			next += len;
+@@ -1737,7 +1738,7 @@
+ 	offset += 2;
+ #endif
+ #if PACKETVER >= 20100721
+-	mapindex_getmapname_ext(mapindex_id2name(p->last_point.map), (char*)WBUFP(buf,108));
++	memcpy(WBUFP(buf,108), strcat(p->last_map,".gat"), MAP_NAME_LENGTH_EXT);
+ 	offset += 16;
+ #endif
+ 	return 106+offset;
+@@ -1751,7 +1752,7 @@
+ 	int i, j, found_num, offset = 0;
+ #if PACKETVER >= 20100413
+ 	offset += 3;
+-#endif
++#endif;
+ 
+ 	found_num = 0;
+ 	for(i = 0; i < char_num; i++) {
+Index: src/char_sql/char.c
+===================================================================
+--- src/char_sql/char.c	(revision 14369)
++++ src/char_sql/char.c	(working copy)
+@@ -837,7 +837,7 @@
+ 		"`char_id`,`char_num`,`name`,`class`,`base_level`,`job_level`,`base_exp`,`job_exp`,`zeny`,"
+ 		"`str`,`agi`,`vit`,`int`,`dex`,`luk`,`max_hp`,`hp`,`max_sp`,`sp`,"
+ 		"`status_point`,`skill_point`,`option`,`karma`,`manner`,`hair`,`hair_color`,"
+-		"`clothes_color`,`weapon`,`shield`,`head_top`,`head_mid`,`head_bottom`,`rename`"
++		"`clothes_color`,`weapon`,`shield`,`head_top`,`head_mid`,`head_bottom`,`rename`,`last_map`"
+ 		" FROM `%s` WHERE `account_id`='%d' AND `char_num` < '%d'", char_db, sd->account_id, MAX_CHARS)
+ 	||	SQL_ERROR == SqlStmt_Execute(stmt)
+ 	||	SQL_ERROR == SqlStmt_BindColumn(stmt, 0,  SQLDT_INT,    &p.char_id, 0, NULL, NULL)
+@@ -873,6 +873,7 @@
+ 	||	SQL_ERROR == SqlStmt_BindColumn(stmt, 30, SQLDT_SHORT,  &p.head_mid, 0, NULL, NULL)
+ 	||	SQL_ERROR == SqlStmt_BindColumn(stmt, 31, SQLDT_SHORT,  &p.head_bottom, 0, NULL, NULL)
+ 	||	SQL_ERROR == SqlStmt_BindColumn(stmt, 32, SQLDT_SHORT,	&p.rename, 0, NULL, NULL)
++	||	SQL_ERROR == SqlStmt_BindColumn(stmt, 33, SQLDT_STRING, &p.last_map, sizeof(p.last_map), NULL, NULL)
+ 	)
+ 	{
+ 		SqlStmt_ShowDebug(stmt);
+@@ -930,7 +931,7 @@
+ 		"`str`,`agi`,`vit`,`int`,`dex`,`luk`,`max_hp`,`hp`,`max_sp`,`sp`,"
+ 		"`status_point`,`skill_point`,`option`,`karma`,`manner`,`party_id`,`guild_id`,`pet_id`,`homun_id`,`hair`,"
+ 		"`hair_color`,`clothes_color`,`weapon`,`shield`,`head_top`,`head_mid`,`head_bottom`,`last_map`,`last_x`,`last_y`,"
+-		"`save_map`,`save_x`,`save_y`,`partner_id`,`father`,`mother`,`child`,`fame`,`rename`"
++		"`save_map`,`save_x`,`save_y`,`partner_id`,`father`,`mother`,`child`,`fame`,`rename`,`last_map`"
+ 		" FROM `%s` WHERE `char_id`=? LIMIT 1", char_db)
+ 	||	SQL_ERROR == SqlStmt_BindParam(stmt, 0, SQLDT_INT, &char_id, 0)
+ 	||	SQL_ERROR == SqlStmt_Execute(stmt)
+@@ -983,6 +984,7 @@
+ 	||	SQL_ERROR == SqlStmt_BindColumn(stmt, 46, SQLDT_INT,    &p->child, 0, NULL, NULL)
+ 	||	SQL_ERROR == SqlStmt_BindColumn(stmt, 47, SQLDT_INT,    &p->fame, 0, NULL, NULL)
+ 	||  SQL_ERROR == SqlStmt_BindColumn(stmt, 48, SQLDT_SHORT,	&p->rename, 0, NULL, NULL)
++	||	SQL_ERROR == SqlStmt_BindColumn(stmt, 49, SQLDT_STRING, &p->last_map, sizeof(last_map), NULL, NULL)
+ 	)
+ 	{
+ 		SqlStmt_ShowDebug(stmt);
+@@ -1597,7 +1599,7 @@
+ 	offset+=2;
+ #endif
+ #if PACKETVER >= 20100721
+-	mapindex_getmapname_ext(mapindex_id2name(p->last_point.map), (char*)WBUFP(buf,108));
++	memcpy(WBUFP(buf,108), strcat(p->last_map,".gat"), MAP_NAME_LENGTH_EXT);
+ 	offset += 16;
+ #endif
+ 	return 106+offset;
+Index: src/common/mmo.h
+===================================================================
+--- src/common/mmo.h	(revision 14369)
++++ src/common/mmo.h	(working copy)
+@@ -37,11 +37,10 @@
+ // 20100413 - 2010-04-13aRagexeRE+ - 0x6b
+ // 20100629 - 2010-06-29aRagexeRE+ - 0x2d0, 0xaa, 0x2d1, 0x2d2
+ // 20100721 - 2010-07-21aRagexeRE+ - 0x6b, 0x6d
+-// 20100727 - 2010-07-27aRagexeRE+ - 0x6b, 0x6d
+ 
+ #ifndef PACKETVER
+-	#define PACKETVER	20081126
+-	//#define PACKETVER 20100629
++	//#define PACKETVER	20081126
++	#define PACKETVER	20100721
+ #endif
+ // backward compatible PACKETVER 8 and 9
+ #if PACKETVER == 8
+@@ -161,8 +160,8 @@
+ 
+ //Mercenary System
+ #define MC_SKILLBASE 8201
+-#define MAX_MERCSKILL 40
+-#define MAX_MERCENARY_CLASS 38
++#define MAX_MERCSKILL 37
++#define MAX_MERCENARY_CLASS 36
+ 
+ enum item_types {
+ 	IT_HEALING = 0,
+@@ -352,6 +351,7 @@
+ #endif
+ 	bool show_equip;
+ 	short rename;
++	char last_map[MAP_NAME_LENGTH_EXT];
+ };
+ 
+ typedef enum mail_status {
+Index: src/map/clif.c
+===================================================================
+--- src/map/clif.c	(revision 14369)
++++ src/map/clif.c	(working copy)
+@@ -755,32 +755,73 @@
+ #if PACKETVER >= 7
+ 	unsigned short offset = 0;
+ #endif
++#if PACKETVER >= 20091103
++	unsigned short len = 0;
++#endif
+ 	sd = BL_CAST(BL_PC, bl);
+ 
++#if PACKETVER <20091103
+ 	if(type)
+ 		WBUFW(buf,0) = spawn?0x7c:0x78;
+ 	else
++#endif
+ #if PACKETVER < 4
+ 		WBUFW(buf,0) = spawn?0x79:0x78;
+ #elif PACKETVER < 7
+ 		WBUFW(buf,0) = spawn?0x1d9:0x1d8;
++#elif PACKETVER < 20080102
++		WBUFW(buf,0) = spawn?0x22b:0x22a;
++#elif PACKETVER < 20091103
++		WBUFW(buf,0) = spawn?0x2ed:0x2ee;
+ #else
+-		WBUFW(buf,0) = spawn?0x22b:0x22a;
++	len = (spawn?62:63) + strlen(status_get_name(bl));
++	
++	WBUFW(buf, 0) = spawn?0x7f8:0x7f9;
++	WBUFW(buf, 2) = len;
++	offset+=2;
++	buf = WBUFP(buffer,offset); //Shift the rest of elements by 2 bytes...
+ #endif
+ 
+ #if PACKETVER >= 20071106
++#if	PACKETVER < 20091103
+ 	if (type) {
+-		// shift payload 1 byte to the right for mob packets
+-		WBUFB(buf,2) = 0; // padding?
++#else
++		if(!type)
++			WBUFB(buf, 2) = 0;
++		else if (disguised(bl))
++			WBUFB(buf, 2) = 1;
++		else {
++#endif
++			switch( bl->type )
++			{
++				case BL_PC:    WBUFB(buf, 2) =  0; break; //PC_TYPE            =  0x0,
++//				case BL_:      WBUFB(buf, 2) =  1; break; //NPC_TYPE           =  0x1,
++				case BL_ITEM:  WBUFB(buf, 2) =  2; break; //ITEM_TYPE          =  0x2,
++				case BL_SKILL: WBUFB(buf, 2) =  3; break; //SKILL_TYPE         =  0x3,
++				case BL_CHAT:  WBUFB(buf, 2) =  4; break; //UNKNOWN_TYPE       =  0x4,
++				case BL_MOB:   WBUFB(buf, 2) =  5; break; //NPC_MOB_TYPE       =  0x5,
++				case BL_NPC:   WBUFB(buf, 2) =  6; break; //NPC_EVT_TYPE       =  0x6,
++				case BL_PET:   WBUFB(buf, 2) =  7; break; //NPC_PET_TYPE       =  0x7,
++				case BL_HOM:   WBUFB(buf, 2) =  8; break; //NPC_HO_TYPE        =  0x8,
++				case BL_MER:   WBUFB(buf, 2) =  9; break; //NPC_MERSOL_TYPE    =  0x9,
++				case BL_ELEM:  WBUFB(buf, 2) = 10; break; //NPC_ELEMENTAL_TYPE =  0xa,
++				default:       WBUFB(buf, 2) =  1; break;
++			}
++#if	PACKETVER >= 20091103
++		}
++#endif
+ 		offset++;
+-		buf = WBUFP(buffer,offset);
++		buf = WBUFP(buffer,offset); //Shift additional 1 bytes...
++#if	PACKETVER < 20091103
+ 	}
+ #endif
++#endif
+ 
+ 	WBUFL(buf, 2) = bl->id;
+ 	WBUFW(buf, 6) = status_get_speed(bl);
+ 	WBUFW(buf, 8) = (sc)? sc->opt1 : 0;
+ 	WBUFW(buf,10) = (sc)? sc->opt2 : 0;
++#if PACKETVER < 20091103
+ 	if (type&&spawn) { //uses an older and different packet structure
+ 		WBUFW(buf,12) = (sc)? sc->option : 0;
+ 		WBUFW(buf,14) = vd->hair_style;
+@@ -789,14 +830,21 @@
+ 		WBUFW(buf,20) = vd->class_; //Pet armor (ignored by client)
+ 		WBUFW(buf,22) = vd->shield;
+ 	} else {
++#endif
+ #if PACKETVER >= 7
++#if PACKETVER < 20091103
+ 		if (!type) {
++#endif
+ 			WBUFL(buf,12) = (sc)? sc->option : 0;
+ 			offset+=2;
+ 			buf = WBUFP(buffer,offset); //Shift 2 bytes to the right for the rest of fields
++#if PACKETVER < 20091103
+ 		} else
+ #endif
++#endif
++#if PACKETVER < 20091103
+ 			WBUFW(buf,12) = (sc)? sc->option : 0;
++#endif
+ 		WBUFW(buf,14) = vd->class_;
+ 		WBUFW(buf,16) = vd->hair_style;
+ 		WBUFW(buf,18) = vd->weapon;
+@@ -807,7 +855,9 @@
+ 		WBUFW(buf,20) = vd->shield;
+ 		WBUFW(buf,22) = vd->head_bottom;
+ #endif
++#if PACKETVER < 20091103
+ 	}
++#endif
+ 	WBUFW(buf,24) = vd->head_top;
+ 	WBUFW(buf,26) = vd->head_mid;
+ 
+@@ -820,6 +870,7 @@
+ 	WBUFW(buf,28) = vd->hair_color;
+ 	WBUFW(buf,30) = vd->cloth_color;
+ 	WBUFW(buf,32) = (sd)? sd->head_dir : 0;
++#if PACKETVER < 20091103
+ 	if (type&&spawn) { //End of packet 0x7c
+ 		WBUFB(buf,34) = (sd)?sd->status.karma:0; // karma
+ 		WBUFB(buf,35) = vd->sex;
+@@ -834,29 +885,49 @@
+ #endif
+ 		return packet_len(0x7c);
+ 	}
++#endif
+ 	WBUFL(buf,34) = status_get_guild_id(bl);
+ 	WBUFW(buf,38) = status_get_emblem_id(bl);
+ 	WBUFW(buf,40) = (sd)? sd->status.manner : 0;
+ #if PACKETVER >= 7
++#if PACKETVER < 20091103
+ 	if (!type) {
++#endif
+ 		WBUFL(buf,42) = (sc)? sc->opt3 : 0;
+ 		offset+=2;
+ 		buf = WBUFP(buffer,offset); //Shift additional 2 bytes...
++#if PACKETVER < 20091103
+ 	} else
+ #endif
++#endif
++#if PACKETVER < 20091103
+ 		WBUFW(buf,42) = (sc)? sc->opt3 : 0;
++#endif
+ 	WBUFB(buf,44) = (sd)? sd->status.karma : 0;
+ 	WBUFB(buf,45) = vd->sex;
+ 	WBUFPOS(buf,46,bl->x,bl->y,unit_getdir(bl));
+ 	WBUFB(buf,49) = (sd)? 5 : 0;
+ 	WBUFB(buf,50) = (sd)? 5 : 0;
+-	if (spawn) {
+-		WBUFW(buf,51) = clif_setlevel(status_get_lv(bl));
+-	} else {
++	if (!spawn) {
+ 		WBUFB(buf,51) = vd->dead_sit;
+-		WBUFW(buf,52) = clif_setlevel(status_get_lv(bl));
++		offset++;
++		buf = WBUFP(buffer,offset); //Shift additional 1 bytes...
+ 	}
++	WBUFW(buf,51) = clif_setlevel(status_get_lv(bl));
++#if PACKETVER >= 20080102
++#if PACKETVER < 20091103
++	if (!type)
++#endif
++		WBUFW(buf,53) = (sd)? sd->state.user_font : 0;
++#endif
++#if PACKETVER >= 20091103
++	safestrncpy((char*)WBUFP(buf,55), status_get_name(bl), strlen(status_get_name(bl)) + 1);
++
++	return len;
++#else
++
+ 	return packet_len(WBUFW(buffer,0));
++#endif
+ }
+ 
+ /*==========================================
+@@ -868,9 +939,13 @@
+ 	struct status_change* sc = status_get_sc(bl);
+ 	struct view_data* vd = status_get_viewdata(bl);
+ 	unsigned char* buf = WBUFP(buffer,0);
++	bool type = !pcdb_checkid(vd->class_);
+ #if PACKETVER >= 7
+ 	unsigned short offset = 0;
+ #endif
++#if PACKETVER >= 20091103
++	unsigned short len = 0;
++#endif
+ 
+ 	sd = BL_CAST(BL_PC, bl);
+ 
+@@ -878,14 +953,45 @@
+ 	WBUFW(buf, 0) = 0x7b;
+ #elif PACKETVER < 7
+ 	WBUFW(buf, 0) = 0x1da;
++#elif PACKETVER < 20080102
++	WBUFW(buf, 0) = 0x22c;
++#elif PACKETVER < 20091103
++	WBUFW(buf, 0) = 0x2ec;
+ #else
+-	WBUFW(buf, 0) = 0x22c;
++	len =  69 + strlen(status_get_name(bl));
++	
++	WBUFW(buf, 0) = 0x7f7;
+ #endif
+ 
++#if PACKETVER >= 20091103
++	WBUFW(buf, 2) = len;
++	offset+=2;
++	buf = WBUFP(buffer,offset); //Shift the rest of elements by 2 bytes...
++#endif
+ #if PACKETVER >= 20071106
+-	WBUFB(buf, 2) = 0; // padding?
++	if(!type)
++		WBUFB(buf, 2) = 0;
++	else if (disguised(bl))
++		WBUFB(buf, 2) = 1;
++	else {
++		switch( bl->type )
++		{
++			case BL_PC:    WBUFB(buf, 2) =  0; break; //PC_TYPE            =  0x0,
++//			case BL_:      WBUFB(buf, 2) =  1; break; //NPC_TYPE           =  0x1,
++			case BL_ITEM:  WBUFB(buf, 2) =  2; break; //ITEM_TYPE          =  0x2,
++			case BL_SKILL: WBUFB(buf, 2) =  3; break; //SKILL_TYPE         =  0x3,
++			case BL_CHAT:  WBUFB(buf, 2) =  4; break; //UNKNOWN_TYPE       =  0x4,
++			case BL_MOB:   WBUFB(buf, 2) =  5; break; //NPC_MOB_TYPE       =  0x5,
++			case BL_NPC:   WBUFB(buf, 2) =  6; break; //NPC_EVT_TYPE       =  0x6,
++			case BL_PET:   WBUFB(buf, 2) =  7; break; //NPC_PET_TYPE       =  0x7,
++			case BL_HOM:   WBUFB(buf, 2) =  8; break; //NPC_HO_TYPE        =  0x8,
++			case BL_MER:   WBUFB(buf, 2) =  9; break; //NPC_MERSOL_TYPE    =  0x9,
++			case BL_ELEM:  WBUFB(buf, 2) = 10; break; //NPC_ELEMENTAL_TYPE =  0xa,
++			default:       WBUFB(buf, 2) =  1; break;
++		}
++	}
+ 	offset++;
+-	buf = WBUFP(buf,offset);
++	buf = WBUFP(buffer,offset); //Shift additional 1 bytes...
+ #endif
+ 	WBUFL(buf, 2) = bl->id;
+ 	WBUFW(buf, 6) = status_get_speed(bl);
+@@ -931,15 +1037,26 @@
+ 	WBUFB(buf,56) = (sd)? 5 : 0;
+ 	WBUFB(buf,57) = (sd)? 5 : 0;
+ 	WBUFW(buf,58) = clif_setlevel(status_get_lv(bl));
++#if PACKETVER >= 20080102
++	WBUFW(buf,60) = (sd)? sd->state.user_font : 0;
++#endif
++#if PACKETVER >= 20091103
++	safestrncpy((char*)WBUFP(buf,62), status_get_name(bl), strlen(status_get_name(bl)) + 1);
+ 
++	return len;
++#else
++
+ 	return packet_len(WBUFW(buffer,0));
++#endif
+ }
+ 
+ //Modifies the buffer for disguise characters and sends it to self.
+ //Used for spawn/walk packets, where the ID offset changes for packetver >=9
+ static void clif_setdisguise(struct block_list *bl, unsigned char *buf,int len)
+ {
+-#if PACKETVER >= 20071106
++#if PACKETVER >= 20091103
++	WBUFL(buf,5)=-bl->id;
++#elif PACKETVER >= 20071106
+ 	WBUFL(buf,3)=-bl->id;
+ #else
+ 	WBUFL(buf,2)=-bl->id;
+@@ -1802,9 +1919,9 @@
+ {
+ 	int fd;
+ #if PACKETVER < 20071002
+-	const int cmd = 0xa0;
++	int cmd = 0xa0;
+ #else
+-	const int cmd = 0x2d4;
++	int cmd = 0x2d4;
+ #endif
+ 	nullpo_retr(0, sd);
+ 
+@@ -1912,7 +2029,8 @@
+ //Unified inventory function which sends all of the inventory (requires two packets, one for equipable items and one for stackable ones. [Skotlex]
+ void clif_inventorylist(struct map_session_data *sd)
+ {
+-	int i,n,ne,arrow=-1;
++	struct item_data *id;
++	int i,n,ne,arrow=-1,posCheck,pos,viewid;
+ 	unsigned char *buf;
+ 	unsigned char *bufe;
+ 
+@@ -1949,10 +2067,17 @@
+ 			WBUFW(bufe,ne*se+28)=0; //Unknown
+ #endif
+ #if PACKETVER >= 20100629
+-			if (sd->inventory_data[i]->equip&EQP_HELM)
+-				WBUFW(bufe,ne*se+30)= sd->inventory_data[i]->look;
+-			else
+-				WBUFW(bufe,ne*se+30)=0;
++			viewid = 0;
++			pos = pc_equippoint(sd,i);
++			id = sd->inventory_data[i];
++
++			// Filter..
++			posCheck |= (pos&EQP_HEAD_LOW) ? EQP_HEAD_LOW : 0;
++			posCheck |= (pos&EQP_HEAD_TOP) ? EQP_HEAD_TOP : 0;
++			posCheck |= (pos&EQP_HEAD_MID) ? EQP_HEAD_MID : 0;
++			if(id && posCheck == EQP_HEAD_LOW || posCheck >= EQP_HEAD_TOP)
++				viewid = id->look;
++			WBUFW(bufe,ne*se+30)=viewid; //Viewids
+ #endif
+ 			ne++;
+ 		}
+@@ -2052,7 +2177,7 @@
+ 	unsigned char *bufe;
+ #if PACKETVER < 5
+ 	const int s = 10; //Entry size.
+-#elfi PACKETVER < 20080102
++#elif PACKETVER < 20080102
+ 	const int s = 18;
+ #else
+ 	const int s = 22;
+@@ -2218,6 +2343,7 @@
+ #else
+ 	const int s = 22;
+ #endif
++
+ #if PACKETVER < 20071002
+ 	const int cmd = 20;
+ #elif PACKETVER < 20100629
+@@ -2225,7 +2351,6 @@
+ #else
+ 	const int cmd = 28;
+ #endif
+-
+ 	buf = (unsigned char*)aMallocA(MAX_CART * s + 4);
+ 	bufe = (unsigned char*)aMallocA(MAX_CART * cmd + 4);
+ 	
+@@ -2273,9 +2398,9 @@
+ 	if( ne )
+ 	{
+ #if PACKETVER < 20071002
+-	WBUFW(bufe,0)=0x122;
++		WBUFW(bufe,0)=0x122;
+ #else
+-	WBUFW(bufe,0)=0x2d2;
++		WBUFW(bufe,0)=0x2d2;
+ #endif
+ 		WBUFW(bufe,2)=4+ne*cmd;
+ 		clif_send(bufe, WBUFW(bufe,2), &sd->bl, SELF);
+@@ -2906,6 +3031,9 @@
+ int clif_equipitemack(struct map_session_data *sd,int n,int pos,int ok)
+ {
+ 	int fd;
++	int viewid = 0, posCheck = 0;
++	struct item_data *id;
++	id = sd->inventory_data[n];
+ 
+ 	nullpo_retr(0, sd);
+ 
+@@ -2917,10 +3045,20 @@
+ #if PACKETVER < 20100629
+ 	WFIFOB(fd,6)=ok;
+ #else
+-	if (ok && sd->inventory_data[n]->equip&EQP_HELM)
+-		WFIFOW(fd,6)=sd->inventory_data[n]->look;
+-	else
+-		WFIFOW(fd,6)=0;
++	
++	viewid = 0;
++	
++	// Filter..
++	posCheck |= (pos&EQP_HEAD_LOW) ? EQP_HEAD_LOW : 0;
++	posCheck |= (pos&EQP_HEAD_TOP) ? EQP_HEAD_TOP : 0;
++	posCheck |= (pos&EQP_HEAD_MID) ? EQP_HEAD_MID : 0;
++		
++	// Now, we know that posCheck can only be a sum of
++	// 0x0001 (Low), 0x0200 (Mid) and 0x0100 (Top).. right? So..
++	if(id && posCheck == EQP_HEAD_LOW || posCheck >= EQP_HEAD_TOP)
++		viewid = id->look;
++	
++	WFIFOW(fd,6)=viewid;
+ 	WFIFOB(fd,8)=ok;
+ #endif
+ 	WFIFOSET(fd,packet_len(0xaa));
+@@ -6019,27 +6157,32 @@
+ {
+ 	unsigned char buf[16];
+ #if PACKETVER < 20100126
+-	const int cmd = 0x106;
++	int cmd = 0x106;
+ #else
+-	const int cmd = 0x80e;
++	int cmd = 0x80e;
+ #endif
+ 
+ 	nullpo_retr(0, sd);
+ 
+ 	WBUFW(buf,0)=cmd;
+ 	WBUFL(buf,2)=sd->status.account_id;
++	if (sd->battle_status.max_hp > SHRT_MAX) { //To correctly display the %hp bar. [Skotlex]
+ #if PACKETVER < 20100126
+-	if (sd->battle_status.max_hp > SHRT_MAX) { //To correctly display the %hp bar. [Skotlex]
+ 		WBUFW(buf,6) = sd->battle_status.hp/(sd->battle_status.max_hp/100);
+ 		WBUFW(buf,8) = 100;
++#else
++		WBUFL(buf,6) = sd->battle_status.hp/(sd->battle_status.max_hp/100);
++		WBUFL(buf,10) = 100;
++#endif
+ 	} else {
++#if PACKETVER < 20100126
+ 		WBUFW(buf,6) = sd->battle_status.hp;
+ 		WBUFW(buf,8) = sd->battle_status.max_hp;
+-	}
+ #else
+-	WBUFL(buf,6) = sd->battle_status.hp;
+-	WBUFL(buf,10) = sd->battle_status.max_hp;
++		WBUFL(buf,6) = sd->battle_status.hp;
++		WBUFL(buf,10) = sd->battle_status.max_hp;
+ #endif
++	}
+ 	clif_send(buf,packet_len(cmd),&sd->bl,PARTY_AREA_WOS);
+ 	return 0;
+ }
+@@ -6050,26 +6193,31 @@
+ void clif_hpmeter_single(int fd, int id, unsigned int hp, unsigned int maxhp)
+ {
+ #if PACKETVER < 20100126
+-	const int cmd = 0x106;
++	int cmd = 0x106;
+ #else
+-	const int cmd = 0x80e;
++	int cmd = 0x80e;
+ #endif
+ 	WFIFOHEAD(fd,packet_len(cmd));
+ 	WFIFOW(fd,0) = cmd;
+ 	WFIFOL(fd,2) = id;
+-#if PACKETVER < 20100126
+ 	if( maxhp > SHRT_MAX )
+ 	{// To correctly display the %hp bar. [Skotlex]
++#if PACKETVER < 20100126
+ 		WFIFOW(fd,6) = hp/(maxhp/100);
+ 		WFIFOW(fd,8) = 100;
++#else
++		WFIFOL(fd,6) = hp/(maxhp/100);
++		WFIFOL(fd,10) = 100;
++#endif
+ 	} else {
++#if PACKETVER < 20100126
+ 		WFIFOW(fd,6) = hp;
+ 		WFIFOW(fd,8) = maxhp;
+-	}
+ #else
+-	WFIFOL(fd,6) = hp;
+-	WFIFOL(fd,10) = maxhp;
++		WFIFOL(fd,6) = hp;
++		WFIFOL(fd,10) = maxhp;
+ #endif
++	}
+ 	WFIFOSET(fd, packet_len(cmd));
+ }
+ 
+@@ -6081,9 +6229,9 @@
+ 	struct map_session_data *sd, *tsd;
+ 	int level;
+ #if PACKETVER < 20100126
+-	const int cmd = 0x106;
++	int cmd = 0x106;
+ #else
+-	const int cmd = 0x80e;
++	int cmd = 0x80e;
+ #endif
+ 
+ 	sd = va_arg(ap, struct map_session_data *);
+@@ -6095,25 +6243,31 @@
+ 	if( !tsd->fd || tsd == sd )
+ 		return 0;
+ 
+-	if( (level = pc_isGM(tsd)) < battle_config.disp_hpmeter || level < pc_isGM(sd) )
+-		return 0;
+-	WFIFOHEAD(tsd->fd,packet_len(cmd));
+-	WFIFOW(tsd->fd,0) = cmd;
+-	WFIFOL(tsd->fd,2) = sd->status.account_id;
++	if( (level = pc_isGM(tsd)) >= battle_config.disp_hpmeter && level >= pc_isGM(sd) )
++	{
++		WFIFOHEAD(tsd->fd,packet_len(cmd));
++		WFIFOW(tsd->fd,0) = cmd;
++		WFIFOL(tsd->fd,2) = sd->status.account_id;
++		if( sd->battle_status.max_hp > SHRT_MAX )
++		{ //To correctly display the %hp bar. [Skotlex]
+ #if PACKETVER < 20100126
+-	if( sd->battle_status.max_hp > SHRT_MAX )
+-	{ //To correctly display the %hp bar. [Skotlex]
+-		WFIFOW(tsd->fd,6) = sd->battle_status.hp/(sd->battle_status.max_hp/100);
+-		WFIFOW(tsd->fd,8) = 100;
+-	} else {
+-		WFIFOW(tsd->fd,6) = sd->battle_status.hp;
+-		WFIFOW(tsd->fd,8) = sd->battle_status.max_hp;
+-	}
++			WFIFOW(tsd->fd,6) = sd->battle_status.hp/(sd->battle_status.max_hp/100);
++			WFIFOW(tsd->fd,8) = 100;
+ #else
+-	WFIFOL(tsd->fd,6) = sd->battle_status.hp;
+-	WFIFOL(tsd->fd,10) = sd->battle_status.max_hp;
++			WFIFOL(tsd->fd,6) = sd->battle_status.hp/(sd->battle_status.max_hp/100);
++			WFIFOL(tsd->fd,10) = 100;
+ #endif
+-	WFIFOSET(tsd->fd,packet_len(cmd));
++		} else {
++#if PACKETVER < 20100126
++			WFIFOW(tsd->fd,6) = sd->battle_status.hp;
++			WFIFOW(tsd->fd,8) = sd->battle_status.max_hp;
++#else
++			WFIFOL(tsd->fd,6) = sd->battle_status.hp;
++			WFIFOL(tsd->fd,10) = sd->battle_status.max_hp;
++#endif
++		}
++		WFIFOSET(tsd->fd,packet_len(cmd));
++	}
+ 	return 0;
+ }
+ 
+@@ -8005,15 +8159,17 @@
+ {
+ 	int i, n, fd;
+ #if PACKETVER < 20100629
+-	const int s = 26;
++	const int cmd = 26;
+ #else
+-	const int s = 28;
++	const int cmd = 28;
++	int viewid,posCheck,pos;
++	struct item_data *id;
+ #endif
+ 	nullpo_retv(sd);
+ 	nullpo_retv(tsd);
+ 	fd = sd->fd;
+ 	
+-	WFIFOHEAD(fd, MAX_INVENTORY * s + 43);
++	WFIFOHEAD(fd, MAX_INVENTORY * 26 + 43);
+ 
+ 	WFIFOW(fd, 0) = 0x2d7;
+ 	safestrncpy((char*)WFIFOP(fd, 4), tsd->status.name, NAME_LENGTH);
+@@ -8030,28 +8186,35 @@
+ 	{
+ 		if (tsd->status.inventory[i].nameid <= 0 || tsd->inventory_data[i] == NULL)	// Item doesn't exist
+ 			continue;
+-		if (!itemdb_isequip2(tsd->inventory_data[i])) // Is not equippable
++		if (itemdb_isstackable2(tsd->inventory_data[i])) // Is not equippable
+ 			continue;
+ 	
+ 		// Inventory position
+-		WFIFOW(fd, n*s+43) = i + 2;
++		WFIFOW(fd, n*26+43) = i + 2;
+ 		// Add refine, identify flag, element, etc.
+-		clif_item_sub(WFIFOP(fd,0), n*s+45, &tsd->status.inventory[i], tsd->inventory_data[i], pc_equippoint(tsd, i));
++		clif_item_sub(WFIFOP(fd,0), n*26+45, &tsd->status.inventory[i], tsd->inventory_data[i], pc_equippoint(tsd, i));
+ 		// Add cards
+-		clif_addcards(WFIFOP(fd, n*s+55), &tsd->status.inventory[i]);	
++		clif_addcards(WFIFOP(fd, n*26+55), &tsd->status.inventory[i]);	
+ 		// Expiration date stuff, if all of those are set to 0 then the client doesn't show anything related (6 bytes)
+-		WFIFOL(fd, n*s+63) = tsd->status.inventory[i].expire_time;
+-		WFIFOW(fd, n*s+67) = 0;
++		WFIFOL(fd, n*26+63) = tsd->status.inventory[i].expire_time;
++		WFIFOW(fd, n*26+67) = 0;
+ #if PACKETVER >= 20100629
+-		if (tsd->inventory_data[i]->equip&EQP_HELM)
+-			WFIFOW(fd, n*s+69) = tsd->inventory_data[i]->look;
+-		else
+-			WFIFOW(fd, n*s+69) = 0;
++			viewid = 0;
++			pos = pc_equippoint(tsd,i);
++			id = tsd->inventory_data[i];
++
++			// Filter..
++			posCheck |= (pos&EQP_HEAD_LOW) ? EQP_HEAD_LOW : 0;
++			posCheck |= (pos&EQP_HEAD_TOP) ? EQP_HEAD_TOP : 0;
++			posCheck |= (pos&EQP_HEAD_MID) ? EQP_HEAD_MID : 0;
++			if(id && posCheck == EQP_HEAD_LOW || posCheck >= EQP_HEAD_TOP)
++				viewid = id->look;
++			WFIFOW(fd, n*cmd+69) = viewid;
+ #endif
+ 		n++;
+ 	}
+ 
+-	WFIFOW(fd, 2) = 43 + n*s;	// Set length
++	WFIFOW(fd, 2) = 43 + n*26;	// Set length
+ 	WFIFOSET(fd, WFIFOW(fd, 2));
+ }
+ 
+@@ -8485,6 +8648,7 @@
+ 		sd->state.connect_new = 0;
+ 		clif_skillinfoblock(sd);
+ 		clif_hotkeys_send(sd);
++		clif_inventorylist(sd);
+ 		clif_updatestatus(sd,SP_NEXTBASEEXP);
+ 		clif_updatestatus(sd,SP_NEXTJOBEXP);
+ 		clif_updatestatus(sd,SP_SKILLPOINT);
+@@ -13375,29 +13539,34 @@
+ {
+ 	unsigned char buf[16];
+ #if PACKETVER < 20100126
+-	const int cmd = 0x106;
++	int cmd = 0x106;
+ #else
+-	const int cmd = 0x80e;
++	int cmd = 0x80e;
+ #endif
+ 	nullpo_retr(0, sd);
+ 
+ 	WBUFW(buf,0)=cmd;
+ 	WBUFL(buf,2) = sd->status.account_id;
+-#if PACKETVER < 20100126
+ 	if( sd->battle_status.max_hp > SHRT_MAX )
+ 	{ // To correctly display the %hp bar. [Skotlex]
++#if PACKETVER < 20100126
+ 		WBUFW(buf,6) = sd->battle_status.hp/(sd->battle_status.max_hp/100);
+ 		WBUFW(buf,8) = 100;
++#else
++		WBUFL(buf,6) = sd->battle_status.hp/(sd->battle_status.max_hp/100);
++		WBUFL(buf,10) = 100;
++#endif
+ 	}
+ 	else
+ 	{
++#if PACKETVER < 20100126
+ 		WBUFW(buf,6) = sd->battle_status.hp;
+ 		WBUFW(buf,8) = sd->battle_status.max_hp;
+-	}
+ #else
+ 		WBUFL(buf,6) = sd->battle_status.hp;
+ 		WBUFL(buf,10) = sd->battle_status.max_hp;
+ #endif
++	}
+ 	clif_send(buf, packet_len(cmd), &sd->bl, BG_AREA_WOS);
+ 	return 0;
+ }
+@@ -13934,7 +14103,7 @@
+ 	//#0x0080
+ 	    7,  3,  2,  2,  2,  5, 16, 12, 10,  7, 29,  2, -1, -1, -1,  0, // 0x8b changed to 2 (was 23)
+ 	    7, 22, 28,  2,  6, 30, -1, -1,  3, -1, -1,  5,  9, 17, 17,  6,
+-#if PACKETVER <= 20100622
++#if PACKETVER < 20100629
+ 	   23,  6,  6, -1, -1, -1, -1,  8,  7,  6,  7,  4,  7,  0, -1,  6,
+ #else
+ 	   23,  6,  6, -1, -1, -1, -1,  8,  7,  6,  9,  4,  7,  0, -1,  6, // 0xaa changed to 9 (was 7)
+Index: src/map/map.h
+===================================================================
+--- src/map/map.h	(revision 14369)
++++ src/map/map.h	(working copy)
+@@ -183,6 +183,7 @@
+ 	BL_SKILL = 0x040,
+ 	BL_NPC   = 0x080,
+ 	BL_CHAT  = 0x100,
++	BL_ELEM  = 0X200,
+ 
+ 	BL_ALL   = 0xFFF,
+ };

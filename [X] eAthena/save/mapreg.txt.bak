@@ -1,0 +1,32 @@
+$top_50min	5
+$top_60min	6
+$top_70min	7
+$top_80min	8
+$top_ptmin	10
+$DTS_Time	9
+$ttranks	999999
+$arn_acotop	480
+$arn_pritop60	480
+$arn_pritop70	480
+$arn_pritop80	480
+$arn_pritop90	480
+$ttnames$,3	Antonio
+$ttnames$,12	Joo Jahk
+$ttnames$,1	RS125
+$ttnames$,10	Nari
+$ttnames$,8	RS125
+$ttnames$,6	Chris
+$ttnames$,4	Aragham
+$ttnames$,13	RS125
+$ttnames$,2	Hollgrehenn
+$ttnames$,11	Senorita Sylvia
+$ttnames$	Breezy Havana
+$ttnames$,9	Breezy Havana
+$ttnames$,7	Breezy Havana
+$timezonestring$	^FF0000GMT^000000
+$ttnames$,5	Kafra Jasmine
+$arn_acotopn$	Default
+$arn_pritopn60$	Default
+$arn_pritopn70$	Default
+$arn_pritopn80$	Default
+$arn_pritopn90$	Default

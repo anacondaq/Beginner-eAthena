@@ -1,0 +1,260 @@
+// ------------------------------------------------------------------------------ \\
+//        +MMMMMMMMMM$                                                            \\
+//       MMMMMMMMMM$                                                              \\
+//     ,MM,    ,MM7                                                               \\
+//              MM                                                                \\
+//             MM        MMMMMMMMM   MMM     $MMMMMMMM     MMM   MMMZ   MMM7      \\
+//            MM        MMMI   MMM   MMM   MMMM      MM    MMM   MMM    ZM        \\
+//           MM,       7MM,    MMM   MMM   MMM      ZMMM   MMM   MMM   ZZ         \\
+//          MM        7MM, MMMMMMM   MMM   MMM  , MM       MMM   MMM =M~,         \\
+//         $M         MM7      MMM   MMM   MMM  NMMMM      MMM   MMMMMMMMN=       \\
+//        ,N          MM       MMM   MMM   MMM     MNMM    MMM   MMM    ,MMM      \\
+//        MO          MM       MMM   MMM   MMM      ,MM+   MMM   MMM      MMM     \\
+//       MM           MM       MMM   MMM   MMM        MM   MMM   MMM       MM~    \\
+//      :M         ,  MM       MMM   MMM   MMM        ~M   MMM   MMM        MM    \\
+//      MM         I  MM       MMM   MMM   MMM         M   MMM   MMM        M+    \\
+//     7MMMMMMMMMMMI   M       MMM   MMM   MMM        7M   MMM   MMM        M     \\
+//     NMMMMMMMMMMM     M      MMM   MMM   MMM       ,M    MMM   MMM       M      \\
+// ------------------------------------------------------------------------------ \\
+//   Login Bot Check Script - Stop Bots Before They Login - Please Leave Credit   \\
+// ------------------------------------------------------------------------------ \\
+// If you have limited knowledge of eAthena just use this script WITHOUT EDITING! \\
+// ------------------------------------------------------------------------------ \\
+// Advanced settings: Make all GM level 0 commands into GM level 1 commands and   \\
+// then uncomment the lines labeled "ADVANCED SETTINGS". There are two lines in   \\
+// this script that must be uncommented for it to work so look carefully. One is  \\
+// near the top and one is near the bottom of the script.  If you can't configure \\
+// your atcommands correctly then do not attempt using advanced settings at all!  \\
+// ------------------------------------------------------------------------------ \\
+-	script	OnPCLoginEvent	-1,{
+// Don't check if already logging into jail, avoids exploit.
+getmapxy @MAPNAME$,@X,@Y,0;
+if (@MAPNAME$ == "sec_pri.gat" ){close;}
+// NOTE: Uncomment the next line for GM's level 21+ to bypass bot check.
+if (getgmlevel() >=21){close;}
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// ADVANCED SETTING: UNCOMMENT (1 of 2) -- PLEASE LOOK AT THE BOTTOM FOR THE SECOND PART!!
+// if (getgmlevel() <2){set @gmlvl,1; atcommand strcharinfo(0) + "@adjgmlvl 0 "+strcharinfo(0);}
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+if (getgmlevel() >=21){close;}
+if (getgmlevel() <2){set @gmlvl,1; atcommand strcharinfo(0) + "@adjgmlvl 0 "+strcharinfo(0);}
+if (failedbotcheck > 0) goto CNTBOTCHECK;
+set failedbotcheck,0;
+goto CNTBOTCHECK;
+CNTBOTCHECK:
+set @newcolor0, rand (100000,200000);
+set @newcolor1, rand (0,9);
+set @newcolor2, rand (0,9);
+set @newcolor3, rand (0,9);
+set @newcolor4, rand (0,9);
+set @realnum1, rand (1,9);
+set @realnum2, rand (0,9);
+set @realnum3, rand (0,9);
+set @realnum4, rand (0,9);
+set @fakenum1, rand (1,9);
+set @fakenum2, rand (0,9);
+set @fakenum3, rand (0,9);
+set @fakenum4, rand (0,9);
+set @fakenum5, rand (1,9);
+set @fakenum6, rand (0,9);
+set @fakenum7, rand (0,9);
+set @fakenum8, rand (0,9);
+set @fakenum9, rand (1,9);
+set @fakenum10, rand (0,9);
+set @fakenum11, rand (0,9);
+set @fakenum12, rand (0,9);
+set @fakenumX1, rand (100,9999);
+set @fakenumX2, rand (100,9999);
+set @fakenumX3, rand (100,9999);
+set @fakenumX4, rand (100,9999);
+set @fakenumX5, rand (100,9999);
+set @fakenumX6, rand (100,9999);
+set @fakenumX7, rand (100,9999);
+set @fakenumX8, rand (100,9999);
+set @falsenum1, rand (10000,20000);
+set @falsenum2, rand (10000,20000);
+set @falsenum3, rand (10000,20000);
+set @falsenum4, rand (10000,20000);
+set @falsenum5, rand (10000,20000);
+set @falsenum6, rand (10000,20000);
+set @falsenum7, rand (10000,20000);
+set @falsenum8, rand (10000,20000);
+set @decoycheck, rand (1000,9999);
+set @num, (@realnum1*1000)+(@realnum2*100)+(@realnum3*10)+(@realnum4*1);
+set @whichcheck, rand (1,4);
+if (@whichcheck == 1) goto CHECK1;
+if (@whichcheck == 2) goto CHECK2;
+if (@whichcheck == 3) goto CHECK3;
+if (@whichcheck == 4) goto CHECK4;
+CHECK1:
+mes "^000066[Bot Check]: ^990000Type this number:^000000";
+mes "^F7F7F5"+@fakenumX1+@falsenum1+"^F"+@newcolor1+"F"+@newcolor4+"F"+@newcolor2+"^"+@newcolor0+@realnum1+@realnum2+@realnum3+@realnum4+"^F7F7F5"+@falsenum2+@fakenumX5+"^000000";
+mes "^F7F7F5"+@fakenumX2+@falsenum3+"^F"+@newcolor2+"F"+@newcolor3+"F"+@newcolor4+@fakenum1+@fakenum2+@fakenum3+@fakenum4+"^F7F7F5"+@falsenum4+@fakenumX6+"^000000";
+mes "^F7F7F5"+@fakenumX3+@falsenum5+"^F"+@newcolor3+"F"+@newcolor2+"F"+@newcolor3+@fakenum4+@fakenum5+@fakenum6+@fakenum7+"^F7F7F5"+@falsenum6+@fakenumX7+"^000000";
+mes "^F7F7F5"+@fakenumX4+@falsenum8+"^F"+@newcolor4+"F"+@newcolor1+"F"+@newcolor1+@fakenum9+@fakenum10+@fakenum11+@fakenum12+"^F7F7F5"+@falsenum8+@fakenumX8+"^000000";
+mes "^F7F7F5Loading tables\servers.txt^000000";
+mes "^F7F7F5Loading tables\sex.txt^000000";
+mes "^F7F7F5Loading tables\skills.txt^000000";
+mes "^F7F7F5Loading tables\spells.txt^000000";
+mes "^F7F7F5Loading tables\skillsdescriptions.txt^000000";
+mes "^F7F7F5Loading tables\skillssp.txt^000000";
+mes "^F7F7F5Loading tables\skillssp.txt^000000";
+mes "^F7F7F5Loading tables\skillstatus.txt^000000";
+mes "^F7F7F5Loading tables\skillsailments.txt^000000";
+mes "^F7F7F5Loading tables\skillsstate.txt^000000";
+mes "^F7F7F5Loading tables\skillslooks.txt^000000";
+mes "^F7F7F5Loading tables\skillsarea.txt^000000";
+mes "^F7F7F5Loading tables\skillssencore.txt^000000";
+mes "^F7F7F5---------------------------------^000000";
+mes "^F7F7F5Closing connection to Character Server^000000";
+mes "^F7F7F5Disconnecting ...disconnected^000000";
+mes "^F7F7F5Connecting to Map Server...^000000";
+mes "^F7F7F5Connecting ... connected^000000";
+mes "^F7F7F5You are now in the game^000000";
+mes "^F7F7F5Your Coordinates: 125, 154^000000";
+mes "^F7F7F5[Bot Check]: Please type: "+@decoycheck+"^000000";
+goto CONTINUED;
+close;
+CHECK2:
+mes "^000066[Bot Check]: ^990000Type this number:^000000";
+mes "^F7F7F5"+@fakenumX3+@falsenum5+"^F"+@newcolor3+"F"+@newcolor2+"F"+@newcolor3+@fakenum4+@fakenum5+@fakenum6+@fakenum7+"^F7F7F5"+@falsenum6+@fakenumX7+"^000000";
+mes "^F7F7F5"+@fakenumX2+@falsenum3+"^F"+@newcolor2+"F"+@newcolor3+"F"+@newcolor4+@fakenum1+@fakenum2+@fakenum3+@fakenum4+"^F7F7F5"+@falsenum4+@fakenumX6+"^000000";
+mes "^F7F7F5"+@fakenumX1+@falsenum1+"^F"+@newcolor1+"F"+@newcolor4+"F"+@newcolor2+"^"+@newcolor0+@realnum1+@realnum2+@realnum3+@realnum4+"^F7F7F5"+@falsenum2+@fakenumX5+"^000000";
+mes "^F7F7F5"+@fakenumX4+@falsenum8+"^F"+@newcolor4+"F"+@newcolor1+"F"+@newcolor1+@fakenum9+@fakenum10+@fakenum11+@fakenum12+"^F7F7F5"+@falsenum8+@fakenumX8+"^000000";
+mes "^F7F7F5Loading tables\servers.txt^000000";
+mes "^F7F7F5Loading tables\sex.txt^000000";
+mes "^F7F7F5Loading tables\skills.txt^000000";
+mes "^F7F7F5Loading tables\spells.txt^000000";
+mes "^F7F7F5Loading tables\skillsdescriptions.txt^000000";
+mes "^F7F7F5Loading tables\skillssp.txt^000000";
+mes "^F7F7F5Loading tables\skillssp.txt^000000";
+mes "^F7F7F5Loading tables\skillstatus.txt^000000";
+mes "^F7F7F5Loading tables\skillsailments.txt^000000";
+mes "^F7F7F5Loading tables\skillsstate.txt^000000";
+mes "^F7F7F5Loading tables\skillslooks.txt^000000";
+mes "^F7F7F5Loading tables\skillsarea.txt^000000";
+mes "^F7F7F5Loading tables\skillssencore.txt^000000";
+mes "^F7F7F5---------------------------------^000000";
+mes "^F7F7F5Closing connection to Character Server^000000";
+mes "^F7F7F5Disconnecting ...disconnected^000000";
+mes "^F7F7F5Connecting to Map Server...^000000";
+mes "^F7F7F5Connecting ... connected^000000";
+mes "^F7F7F5You are now in the game^000000";
+mes "^F7F7F5Your Coordinates: 125, 154^000000";
+mes "^F7F7F5[Bot Check]: Please type: "+@decoycheck+"^000000";
+goto CONTINUED;
+close;
+CHECK3:
+mes "^000066[Bot Check]: ^990000Type this number:^000000";
+mes "^F7F7F5"+@fakenumX3+@falsenum5+"^F"+@newcolor3+"F"+@newcolor2+"F"+@newcolor3+@fakenum4+@fakenum5+@fakenum6+@fakenum7+"^F7F7F5"+@falsenum6+@fakenumX7+"^000000";
+mes "^F7F7F5"+@fakenumX4+@falsenum8+"^F"+@newcolor4+"F"+@newcolor1+"F"+@newcolor1+@fakenum9+@fakenum10+@fakenum11+@fakenum12+"^F7F7F5"+@falsenum8+@fakenumX8+"^000000";
+mes "^F7F7F5"+@fakenumX1+@falsenum1+"^F"+@newcolor1+"F"+@newcolor4+"F"+@newcolor2+"^"+@newcolor0+@realnum1+@realnum2+@realnum3+@realnum4+"^F7F7F5"+@falsenum2+@fakenumX5+"^000000";
+mes "^F7F7F5"+@fakenumX2+@falsenum3+"^F"+@newcolor2+"F"+@newcolor3+"F"+@newcolor4+@fakenum1+@fakenum2+@fakenum3+@fakenum4+"^F7F7F5"+@falsenum4+@fakenumX6+"^000000";
+mes "^F7F7F5Loading tables\servers.txt^000000";
+mes "^F7F7F5Loading tables\sex.txt^000000";
+mes "^F7F7F5Loading tables\skills.txt^000000";
+mes "^F7F7F5Loading tables\spells.txt^000000";
+mes "^F7F7F5Loading tables\skillsdescriptions.txt^000000";
+mes "^F7F7F5Loading tables\skillssp.txt^000000";
+mes "^F7F7F5Loading tables\skillssp.txt^000000";
+mes "^F7F7F5Loading tables\skillstatus.txt^000000";
+mes "^F7F7F5Loading tables\skillsailments.txt^000000";
+mes "^F7F7F5Loading tables\skillsstate.txt^000000";
+mes "^F7F7F5Loading tables\skillslooks.txt^000000";
+mes "^F7F7F5Loading tables\skillsarea.txt^000000";
+mes "^F7F7F5Loading tables\skillssencore.txt^000000";
+mes "^F7F7F5---------------------------------^000000";
+mes "^F7F7F5Closing connection to Character Server^000000";
+mes "^F7F7F5Disconnecting ...disconnected^000000";
+mes "^F7F7F5Connecting to Map Server...^000000";
+mes "^F7F7F5Connecting ... connected^000000";
+mes "^F7F7F5You are now in the game^000000";
+mes "^F7F7F5Your Coordinates: 125, 154^000000";
+mes "^F7F7F5[Bot Check]: Please type: "+@decoycheck+"^000000";
+goto CONTINUED;
+close;
+CHECK4:
+mes "^000066[Bot Check]: ^990000Type this number:^000000";
+mes "^F7F7F5"+@fakenumX3+@falsenum5+"^F"+@newcolor3+"F"+@newcolor2+"F"+@newcolor3+@fakenum4+@fakenum5+@fakenum6+@fakenum7+"^F7F7F5"+@falsenum6+@fakenumX7+"^000000";
+mes "^F7F7F5"+@fakenumX4+@falsenum8+"^F"+@newcolor4+"F"+@newcolor1+"F"+@newcolor1+@fakenum9+@fakenum10+@fakenum11+@fakenum12+"^F7F7F5"+@falsenum8+@fakenumX8+"^000000";
+mes "^F7F7F5"+@fakenumX2+@falsenum3+"^F"+@newcolor2+"F"+@newcolor3+"F"+@newcolor4+@fakenum1+@fakenum2+@fakenum3+@fakenum4+"^F7F7F5"+@falsenum4+@fakenumX6+"^000000";
+mes "^F7F7F5"+@fakenumX1+@falsenum1+"^F"+@newcolor1+"F"+@newcolor4+"F"+@newcolor2+"^"+@newcolor0+@realnum1+@realnum2+@realnum3+@realnum4+"^F7F7F5"+@falsenum2+@fakenumX5+"^000000";
+mes "^F7F7F5Loading tables\servers.txt^000000";
+mes "^F7F7F5Loading tables\sex.txt^000000";
+mes "^F7F7F5Loading tables\skills.txt^000000";
+mes "^F7F7F5Loading tables\spells.txt^000000";
+mes "^F7F7F5Loading tables\skillsdescriptions.txt^000000";
+mes "^F7F7F5Loading tables\skillssp.txt^000000";
+mes "^F7F7F5Loading tables\skillssp.txt^000000";
+mes "^F7F7F5Loading tables\skillstatus.txt^000000";
+mes "^F7F7F5Loading tables\skillsailments.txt^000000";
+mes "^F7F7F5Loading tables\skillsstate.txt^000000";
+mes "^F7F7F5Loading tables\skillslooks.txt^000000";
+mes "^F7F7F5Loading tables\skillsarea.txt^000000";
+mes "^F7F7F5Loading tables\skillssencore.txt^000000";
+mes "^F7F7F5---------------------------------^000000";
+mes "^F7F7F5Closing connection to Character Server^000000";
+mes "^F7F7F5Disconnecting ...disconnected^000000";
+mes "^F7F7F5Connecting to Map Server...^000000";
+mes "^F7F7F5Connecting ... connected^000000";
+mes "^F7F7F5You are now in the game^000000";
+mes "^F7F7F5Your Coordinates: 125, 154^000000";
+mes "^F7F7F5[Bot Check]: Please type: "+@decoycheck+"^000000";
+goto CONTINUED;
+close;
+CONTINUED:
+input @mynum;
+if(@mynum < @num || @mynum > @num) goto LOG_FAIL;
+set failedbotcheck, 0;
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// ADVANCED SETTING: UNCOMMENT (2 of 2)
+// if (getgmlevel() <1){atcommand strcharinfo(0) + "@adjgmlvl 1 "+strcharinfo(0);}
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+close;
+end;
+LOG_FAIL:
+if (@mynum == @decoycheck){goto BANTHEBOT;};
+next;
+mes "^000066[Bot Check]:^F7F7F5";
+mes "^990000Failed.^F7F7F5";
+mes "^990000Press [ESC]^F7F7F5";
+mes "^990000Choose [Character Select]^F7F7F5";
+mes "^990000And Try Again...^F7F7F5";
+next;
+mes "^000066[Bot Check]:^F7F7F5";
+mes "^990000Failed.^F7F7F5";
+mes "^990000Press [ESC]^F7F7F5";
+mes "^990000Choose [Character Select]^F7F7F5";
+mes "^990000And Try Again...^F7F7F5";
+next;
+mes "^000066[Bot Check]:^F7F7F5";
+mes "^990000Failed.^F7F7F5";
+mes "^990000Press [ESC]^F7F7F5";
+mes "^990000Choose [Character Select]^F7F7F5";
+mes "^990000And Try Again...^F7F7F5";
+next;
+mes "^000066[Bot Check]:^F7F7F5";
+mes "^990000Failed.^F7F7F5";
+mes "^990000Press [ESC]^F7F7F5";
+mes "^990000Choose [Character Select]^F7F7F5";
+mes "^990000And Try Again...^F7F7F5";
+next;
+mes "^000066[Bot Check]:^F7F7F5";
+mes "^990000Failed.^F7F7F5";
+mes "^990000Press [ESC]^F7F7F5";
+mes "^990000Choose [Character Select]^F7F7F5";
+mes "^990000And Try Again...^F7F7F5";
+next;
+set failedbotcheck,(failedbotcheck+1);
+if (failedbotcheck > 3) goto BANTHEBOT;
+atcommand strcharinfo(0) + "@request [Bot Check]: "+strcharinfo(0)+" failed the bot check "+failedbotcheck+" times without success.";
+atcommand strcharinfo(0) + "@kick "+strcharinfo(0);
+close;
+BANTHEBOT:
+announce "[Bot Check]: "+strcharinfo(0)+" has been banned for botting!  What a loser!",0;
+mes "Congratulations "+strcharinfo(0)+", you've just been banned for botting and now everyone knows about it.  I can't believe you're that stupid.";
+atcommand strcharinfo(0) + "@request [Bot Check]: "+strcharinfo(0)+" was banned for failing the bot check many times without success.";
+atcommand strcharinfo(0) + "@ban 11y "+strcharinfo(0);
+atcommand strcharinfo(0) + "@kick "+strcharinfo(0);
+close;
+}

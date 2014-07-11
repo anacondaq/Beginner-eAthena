@@ -1,0 +1,1135 @@
+// Format:
+// Date (mm/dd/yr)
+// rNumber [Author]
+// 	* Modifications.
+// 	- Details.
+//========================================
+
+08/05/2010
+	r450 [pakpil]
+	* Updated to eAthena r14369.
+
+06/30/2010
+	r439 [pakpil]
+	* Updated to eAthena r14346.
+
+06/09/2010
+	r422 [pakpil]
+	* Updated to eAthena r14334.
+
+05/23/2010
+	r403 [pakpil]
+	* Updated to eAthena r14293
+	* Fixed GN_WALLOFTHORN that was causing problems with repeating fire damages.
+
+04/29/2010
+	r376 [Rytech]
+	*Added purchase shop items to item_db2. Both items are %100 official coded.
+	*Changed ALL_BUYING_SHOP to a quest skill as its officially gained through a npc.
+	-Requires the player to have learned Vending level 1 and pay 10,000 zeny to learn.
+	*The ALL_BUYING_SHOP was added to every job in the skill_tree file that is able to
+	-learn the vending skill as its a quest skill needed in their trees. The lines were
+	-placed in a temporarly spot at the bottom for testing and will be organized in the
+	-future when the system is completed.
+	*Using the ALL_BUYING_SHOP skill requires and costs 1 Buying Stall Permit. Item 6377.
+
+04/28/2010
+	r372 [Rytech]
+	*Added the ALL_BUYING_STORE to the database.
+	-Skill ID, max level, and sp cost is official.
+	-Level 1 is used through a item, like a item skill and gives 2 slots for purchaseing.
+	-Level 2 is used by using the actural skill in the skill list, it gives access to 5 slots.
+	-It doesent work yet, but the above info lists how its used and how each level works.
+
+04/26/2010
+	r368 [pakpil]
+	* Updated to eAthena r14281.
+	* Fixed Job check in thana_quest.txt
+	* Added LG_MOONLSLASHER skill.
+
+04/24/2010
+	r364 [pakpil]
+	* Updated to eAthena r14278.
+
+04/20/2010
+	r351 [Jobbie]
+	* Fixed Cloud Kill not causing poison effect. Bug Report 377.
+	- As of 01/06/2010 Patch 
+	-- The poison element changing part of the skill effect is removed. But still it will cause Poison status.
+	* Remove the probability of Stun status of Psychic Wave as of 01/06/2010 Patch. Bug Report 376
+
+	r350 [Jobbie]
+	- Adjusted Land skill of Sorcerer close to official behavior.
+	- Fix Cloud Kill which can be casted more than one.
+	- People not on top of Warmer area of effect must not take its status effect. Fix also which people affected this status is not immune to Freeze and Freezing status.
+	- Fix the resistance calculation for Vacuume Extreme.
+	- Corrected the Arch Bishop skill 'Adoramus' to not cause duplicate agi down effect.
+
+04/17/2010
+	r343 [Rytech]
+	*Updated settings for sorcerer skills in skill_db.
+	*Added cast times for sorcerer's EL skills. Their based on info from iro wiki forums.
+	*Changed the max levels for all the elemental spirits skill to 3 as the level used depends
+	-on the spirit summoned.
+
+04/17/2010
+	r340 [Rytech]
+	*Added prices for sorcerer's elemental points and enabled them.
+	*Updated SO_EL_CONTROL's max level to 4.
+	*Added tags and ID's for a few new found Mercenary skills.
+	*Added remaining info and enabled elemental skills. Max levels may need to be raised later.
+	*Updated SP requirements for sorcerer skills.
+	*Fully updated all sorcerer skill trees to official.
+	*Added tags for some new mercenary skills to the source.
+
+04/15/2010
+	r336 [Rytech]
+	*Fixes and updates to the database.
+	-Fixed incorrectly set ID's for baby mounts job bonuses in job_db2.
+	-Enabled the elemental spirits monsters in mob_db2. They will remain in here since the client
+	-treats them as regular monsters.
+	-Assigned ID's to the remaining sorcerer's elemental skills in skill_db and skill_cast_db.
+	-Added sorcerer's elemental spirit skills to the skill trees. However the prerequirements
+	-wernt added yet as this was added for testing purposes, plus I dont know them yet.
+
+	*Update to source.
+	-Small cleanup to the job system. Thanks goes to Pakpil for pointing it out.
+	-Added skill tags for remaining sorcerer elemental skills.
+
+04/15/2010
+	r330 [Jobbie]
+	* Minor fix to Pinpoint Attack. (followed up r329)
+	- Snap effect during WoE should not be triggered however this skill is usable as range attack.
+
+04/12/2010
+	r323 [pakpil]
+	* Fixed SC_AUTOSHADOWSPELL cast time. Bug report 379.
+	* Fixed some isequipped() checks on item_db.txt.
+	* Fixed exp table in exp.txt.
+	- 3rd job have been moved to hadle these by separate.
+	* Fixed LG_REFLECTDAMAGE that shouldn't reduce damage received.
+
+04/09/2010
+	r318 [pakpil]
+	* Fixed SO_STRIKING. Follow up r317.
+
+	r317 [pakpil]
+	* Fixed SO_STRIKING. Bug report 277.
+
+	r316 [pakpil]
+	* Fixed a type in LG_SHIELDPRESS stun duration. Bug report 357.
+
+04/08/2010
+	r315 [Jobbie]
+	* Fixed Vacuum Extreme missing duration resistance. Bug Report 360.
+	- This skill now uses its own SC_* and SI_* to adopt official behavior.
+
+	r313 [Jobbie]
+	* Added GN_MANDRAGORA skill.
+
+	r312 [pakpil]
+	* Fixed WM_GLOOMYDAY. Added missing skill data.
+	* Fixed LG_REFLECTDAMAGE area effect. Follow up r304.
+	* Fixed GN_THORNSTRAP.
+	- Fixed its unit layout.
+	- Fixed behavior using clif_changetraplook instead skill_unitsetting.
+
+04/07/2010
+	r311 [Jobbie]
+	* Fix minor bug in battle.c
+
+	r309 [Rytech]
+	*Added tags and place holders for elemental spirits skills.
+
+	r308 [pakpil]
+	* Fixed LG_SHIELDPRESS.
+	- Applied missing effects from Gloomy Day skill.
+
+
+	r307 [Jobbie]
+	* Adoramus Update adjusted to official behavior.
+	- Uses now its own SC_* and SI_* regardless to its blind status effect.
+
+04/06/2010
+	r306 [Jobbie]
+	- Minor fix to WL_RELEASE skill when releasing ball. Removed displaying "Unknown-Skill"
+	- Minor fix to NC_SELFDESTRUCT not checking in inventory to Self destruct item.
+	- Fix a typo in status.h
+	
+	r305 [pakpil]
+	*Added LG_PRESTIGE and LG_SHIELDPRESS skills.
+	*Minor fix in LG_PIETY where its casting should be interrupted when the caster get damage.
+	*Fixed bug report 346.
+
+04/05/2010
+	r304 [pakpil]
+	*Added LG_PIETY skill.
+	*Fixed bug report 317.
+
+	r302 [pakpil]
+	*Fixed bug report 335.
+	*Fixed bug report 337.
+
+03/30/2010
+	r296 [Rytech]
+	*Updated prices on items in item_db2.
+
+03/30/2010
+	r295 [Jobbie]
+	* Added official feature of party name display.
+	- Configuration was added to allow server owner which way to follow (Aegis or eAthena).
+
+	r294 [Jobbie]
+	- Disabled skills which are not yet implemented to avoid map-server warnings.
+
+03/28/2010
+	r293 [Jobbie]
+	* Updated Warlocks skills Casting Time, After-Cast Delay, Re-use Delay and Duration.
+	* Fixed wrong value of -Def for freezing status.
+	* Corrected the behavior of Warg Strike when used in WoE while mounted.
+	* Corrected the behavior of Summon Balls of Warlock when reaching maximum #'s of summon.
+
+	r292 [Jobbie]
+	* Fixed a mistake in calculation for Clusterbomb skill.
+	* Fixed a missing case of Job Id's in pc_isriding.
+	* Corrected the behavior of Reflect Shield and Reflect Damage when used vice versa.
+
+03/26/2010
+	r291 [Jobbie]
+	* Fixed missing mob_chat_db.txt
+
+03/25/2010
+	r290 [Jobbie]
+	* Baby Rune, Baby Guard, Baby Ranger and Baby Mechanic is now accessible mounting. Follow up r282
+
+	r289 [Rytech]
+	*Database updates.....
+	-Added Sorcerer's point items that are used for their summon skills.
+	-Added skill_db and skill_require_db entrys for more Sorcerer skills, however they have no ID yet.
+	-Updated Sura skill requirements.
+	-Updated Sura skill trees.
+	*Source Updates.....
+	-Added job entrys for mounts in char.c
+	-Added tons of new status tags and ID's to status.h
+
+	r288 [Jobbie]
+	* Added new SC_*'s used by items 12429 to 12434.
+	- These items uses its own sc together with its own status icon to match official servers implementation.
+	* Fix typo in changelog.
+
+	r287 [Jobbie]
+	* Important merged up of eAthena SVN update from rev14268-71.
+
+	r286 [Jobbie]
+	* Updated some sp cost in Sorcerer skills.
+	* Crystalize status must be ended when hitted by fire element.
+	* Slight cleanup in status.c
+
+	r284 [pakpil]
+	* Fixed a mistake in PACKETVER that affec to to clif_displayexp. Sorry.
+	- This was caussing dead mobs don't dessapear correclty in clients oldest than 2009-11-10aRagexeRE.
+	* Added LG_CANNONSPEAR skill. Still need some info.
+	* Fixed LG_REFLECTDAMAGE that shouldn't reduce damage reflected.	
+
+	r283 [Rytech]
+	*Small fix in the skill_db.
+
+03/24/2010
+	r282 [Rytech]
+	*Added baby mount support to the job system.
+	-The mounts wont be accessable until their fully coded in the needed area's in the source.
+
+	r281 [pakpil]
+	* Fixed a mistake in CR_REFLECSHIELD and LG_REFLECTDAMAGE. Follow up r280.
+
+03/23/2010
+	r280 [pakpil]
+	* Added LG_REFLECTDAMAGE skill.
+	- Updated CR_REFLECTSHIELD that should fail if you are under LG_REFLECTDAMAGE and viceversa.
+	* Minor fix in LG_BANISHINGPOINT that should take the weapon element.
+
+	r279 [Rytech]
+	*Changed some settings back to classic mechanic's and eAthena defults to keep true to the project goals.
+	-Things like max stats for 3rd jobs will by 99 for regular and 80 for babys. You can raise this if you want.
+	-Changed to setting for renewal cast times to no to keep the classic casting system working.
+	-Changed MAX_CHAR in mmo.h to 9, which is eA's defult, as well as the defult in diff patches.
+	-MAX_LEVEL will be kept at a 150 int he source, however itl stay limited to 99 in the exp.txt
+	-unless you switch to using the exp2.txt table and set your own limits from there.
+
+03/22/2010
+	r277 [Jobbie]
+	* Minor fix on my last commit. Follow up r276
+	- Sorry for being rusty
+
+	r276 [Jobbie]
+	* Adjusted the behavior of Fearbreeze skill.
+	* Fixed a mistake in checking wind element for both hands when using NC_AXETORNADO.
+
+	r275 [pakpil]
+	* Added missing changes in r274.
+
+	r274 [pakpil]
+	* Fixed GC_CREATENEWPOISON skill.
+	- All poisons require and consume 1 Medicine Bowl and 1 Poison Creation Kit.
+	- The ammount of bottles obtained depends on GC_RESEARCHNEWPOISON skill level.
+
+	r273 [pakpil]
+	* Fixed GC_WEAPONCRUSH behavior.
+	* Fixed minor typo in pc.h.
+
+03/21/2010
+	r272 [Rytech]
+	*Server now ignores the rune knight ID's that between the MECHANIC_T2 and BABY_RUNE jobs.
+	-Removed the exp fix as its not needed.
+
+03/21/2010
+	r271 [pakpil]
+	* Updated to eA revision 14267.
+
+	r270 [pakpil]
+	* Fixed an issue when reading exp table.
+	
+	r269 [pakpil]
+	* Added max_baby_third_paramater to set max parameter to 3rd baby classes.
+	* Fixed an issue where the cart was being taked off when you are removing your mado.
+	* Minor fix in pc_setoption to prevent 3rd baby class to mount until these can do it.
+
+03/20/2010
+	r268 [Rytech]
+	*Added in the adjusted checks for the V2.0 job system.
+	-This should be the final revision for the adding of the updated system.
+	-A big thanks for pakpil for this one.
+
+03/20/2010
+	r267 [Jobbie]
+	* Fixed an issue of recent skills in eA that using skill_blockpc_start
+
+	r266 [pakpil]
+	* Fixed GC_WEAPONBLOCKING that wasn't consuming SP while active.
+	* Fixed some damage formulas.
+
+	r265 [pakpil]
+	* Fixed an issue that was crashing server. Bug report 281.
+
+	r264 [Rytech]
+	*Added the remaining parts of the system update.
+	-All thats left is to update the few checks in the map server.
+
+03/20/2010
+	r263 [Rytech]
+	*This is part 1 of a big major update.
+	-WARNING!!!! For the next few revisions following this one, the program will be uncompileable due to many checks needing to be redone
+	-because of the add in of this update. Update to this revision ONLY if your intrested at looking at the code.
+
+	*Added in the V2.0 3CeAM job system.
+	-This system will give better support for many things and also fix and improve on many of the problems weve had in the past.
+	-Another update will follow soon to add in some other needed info for the charactor server.
+	-This adds support for the 3rd class baby jobs. You can freely test them, but their skills will not appear in the client normally.
+	-The item database upper settings are planned on being redone soon as third jobs now only use 1 upper setting.
+	-You WILL need a 2010-03-10 RE client or higher to beable to see the baby jobs. XRay may not beable to support baby jobs
+	-properly, even if you add them into your tables since the client itself does the sprite shrink trick for baby jobs. (I think)
+	-Please do not post any "It wont compile, and it gives errors trying" reports. I am aware of this as many of the checks and features
+	-will have to be changed or redone to work with the new system.
+
+03/19/2010
+	r262 [pakpil]
+	* Updated WL_WHITEIMPRISON and WL_SOULEXPANSION skills.
+	- Added official OPT1_IMPRISON used whit WL_WHITEIMPRISON.
+	* Updated item_db2.txt.
+
+03/18/2010
+	r261 [pakpil]
+	* Udated all Mechanic accessory.
+
+	r260 [pakpil]
+	* Fixed SC_AUTOSHADOWSPELL that wasn't removing SC_STOP when the skill fails.
+
+	r259 [Rytech]
+	*Added tags and ID's for all the latest and future status ID's in status.h.
+	-They will be disabled until realy to use.
+	*Updated const.txt to support all the latest existing NPC's.
+	-Have fun adding those new npc's to your server's. =P
+	*Added sorcerer's elemental spirit and genetic homunculus s tags and ID's to the mob_db2.
+	-They will remain disabled until the sprites come out for them.
+	-I dont plan on leaveing them here since they will require their own systems and database files real soon.
+
+03/17/2010
+	r258 [pakpil]
+	* Fixed WM_VOICEOFSIREN that wasn't blocking use skills in the W/M under the skill effect.
+
+	r257 [pakpil]
+	* Added LG_BANISHINGPOINT skill.
+	* Fixed WM_GREAT_ECHO skill damage type and SP reduction per W/M in party.
+	* Fixed WL_FROSTMISTY and WL_JACKFROST casting, aftercast and cooldown time and Freezing/Freeze chances.
+	* Fixed SC_FREEZING that don't affect to boss monsters.
+	* Fixed WL_FROSTMISTY damage.
+	* Fixed RK_SONICWAVE and RK_HUNDREDSPEAR damages.
+	* Added custom 3CeAM breeder. Follow up r253.
+
+
+03/15/2010
+	r256 [pakpil]
+	* Added missing 'breeder_3ceAM' npc in r253.
+	
+	r255 [pakpil]
+	* Fixed WL_HELLINFERNO that was not working propertly.
+	* Minor cleanup in skill_additional_effect.
+	* Fixed a mistake in Thanatos Tower quest in r253. Sorry :/
+
+	r254 [pakpil]
+	* Fixed an issue in WL_READING_SB where it wasn't removing SC_STOP status when the Warlock haven't Spellbooks on the inventory.
+
+	r253 [pakpil]
+	* Fixed  some items that aren't given its bonus correctly to certain classes.
+	* Fixed splash area in skill_db that were wrong. Can't remember the reporter's name, thx anyway.
+	* Fixed WL_COMET adjusting its behavior to the official one.
+	* Minor fix in WL_COMET and AB_ADORAMUS that should fails before cast them if you haven't requires gemstones when are casted alone.
+	* Added check for 3rd jobs in Thanatos tower quest.
+	* Added custom Breeder for 3rd jobs. Plz report any problem.
+
+	r252 [pakpil]
+	* Fixed an issue where the client freeze when use disguise. Bug report 252.
+
+03/14/2010
+	r251 [pakpil]
+	* Fixed RA_ELECTRICSHOCKET that wasn't draining SP and wasn't traped all in 5x5 area.
+
+	r250 [Jobbie]
+	* Update skill cast time of some Rune Knight skills.
+
+	r249 [Jobbie]
+	* Corrected some items in item_db2.
+	* Added NC_MAINFRAME, NC_SILVERSNIPER, NC_DISJOINT, GN_S_PHARMACY, GN_MIX_COOKING and GN_MAKEBOMB.
+	* Fixed some radius effect, cooldown and casttime of Mechanic and Genetic skills.
+	* Corrected some requirements when using NC_SILVERSNIPER.
+	* Corrected some SC_* in which mado is unequipped it is not ended.
+	* Fixed missing auto trigger code of Warg Strike when attacking normal or with Bow.
+	* Fixed NC_COLDSLOWER which is having the same status effect.
+	* Fixed SC_LEECHESEND. follow up (r246).
+
+	r248 [pakpil]
+	* Fixed WL_COMET and AB_ADORAMUS that are not checking for partner correctly and wasn't consuming Blue/Red gemstones while were casted alone.
+	* Minor fix in riding where Gryphons and PecoPeco should work the same way.
+
+	r246 [Jobbie]
+	* Corrected item id 12383 which is not usable.
+	* Corrected Highness Heal healing value formula.
+	* Corrected Coloceo Heal which not healing players although it displays the healing value.
+	* Adjusted Guillotine Cross poisons behavior to work same in official server.
+	
+
+03/13/2010
+	r245 [Jobbie]
+	* Fixed an issue where Mechanics cannot equip mado when using NPC
+
+03/12/2010
+	r244 [pakpil]
+	* Minor fix in LG_FORCEOFVANGUARD where should add rage with physical attacks only.
+
+	r243 [pakpil]
+	* Added LG_FORCEOFVANGUARD and LG_RAGEBURST skills.
+	- Added similar funtions to those used with Monk's spirit spheres to hadle LG_FORCEOFVANGUARD since these skills have same behavior and you can get both at a time.
+	* Minor fix in battle_calc_weapon_attack where hitrate calculation is done. Added missing break.
+
+03/11/2010
+	r241 [pakpil]
+	* Added missing sc check in GC_POISONINGWEAPON.
+	* Fixed an issue in WM_REVERBERATION where these should get 1 damage like plants.
+
+03/10/2010
+	r238 [pakpil]
+	*Added missing files in r237
+
+	r237 [pakpil]
+	* Full updated to eAthena revision 14260.
+
+	r236 [pakpil]
+	* Minor update to eAthena revision 14243.
+
+	r235 [pakpil]
+	* Rewrited WL_READING_SB and WL_RELEASE improving and adjusting its behavior to the official one.
+	- Should use status changes instead arrays in map_session_data.
+	- Reduced MAX_SKILL_SPELLBOOK_DB to the real ammount of currently available spellbooks, 17.
+
+03/08/2010
+	r232 [pakpil]
+	* Reverted where WL_READING_SB remove items, sorry was a mistake.
+
+	r230 [pakpil]
+	* Minor fix in SC_FEINTBOMB that was moving to a wrong cell in diagonal.
+	* Fixed crash server in GN_WALLOFTHORN when it received damage.
+	* Fixed GC_POISONINGWEAPON and WL_READING_SB that weren't removing poisons or spellbooks from inventory.
+
+03/07/2010
+	r229 [Jobbie]
+	* Added NC_F_SIDESLIDE, NC_B_SIDESLIDE and NC_SHAPESHIFT.
+	* Fix some item inside item_db which is not updated to latest Equippable upper-types.
+
+	r228 [pakpil]
+	* Minor fix in WL_RECOGNIZEDSPELL behavior.
+
+	r227 [Jobbie]
+	* Archbishop skills update.
+	- Casting time and Cooldowns was updated based on latest info.
+	- Clearance was rewritted to behave same to official server.
+	Info: http://forums.irowiki.org/showpost.php?p=591645&postcount=576
+	- Updated Expiatio skill. Currently the skill works the same as Asperio but only its a self skill. Still needs to be redone.
+	- Duple light Melee should take weapon element and Magic is forced to be neutral. Chance to trigger is 25%.
+	- Adoramus requires 1 blue gemstone if casted solo.
+	- Fix structure for Adoramus and Judex damage calculation.
+	- Epiclesis as of official server doesn't damage Undead or Demon type monster.
+	- Renovatio should damage to undead type of monster and fail if casted to self/ally with undead armor.
+	- Cleanup Ancilla coding.
+	- Updated the behavior of Coluceo Heal skill.
+	- Updated Lauda Ramus and Agnus to work like official behavior. Info the same as above link.
+	* Fixed casting reduction now takes the maximum value to be used as reduction rate.
+	* Named some related kRO items in item_db2.txt
+
+	r226 [Jobbie]
+	* Added bFixCastRate.
+	- Updated items which uses the bonus bFixCastRate.
+	* Renovatio has a full fixed cast time not a skill that is not reducable by dex. follow up r61.
+	* Minor update for the damage calculation structure for Sorcerer skills.
+	* Added the rest of status id's taken from aegis data.
+	* Minor fix to Venom Pressure the skill cannot be used without Poisoning Weapon status.
+
+03/06/2010
+	r225 [pakpil]
+	* Fixed a mistake in my last commit. Sorry.
+
+	r224 [pakpil]
+	* Added GC_POISONSMOKE, GC_PHANTOMMENACE and GC_DARKILLUSION skills.
+
+	r223 [pakpil]
+	* Added GC_VENOMIMPRESS, GC_HALLUCINATIONWALK and GC_ANTIDOTE skills.
+	* Minor fix in new packet clif_tradeadditem that wasn't showing zeny.
+	* Added 3 extra seconds per GC_RESEARCHNEWPOISON level bonus in ASC_EDP.
+	* Minor fix in some status changes used as cooldown that shouldn't be debuffed.
+	* Minor fix in GC_COUNTERSLASH and GC_WEAPONCRUSH that should show skill fail every time you try to use these skills.
+
+03/03/2010
+	r222 [pakpil]
+	* Minor fix in trade and gstorage packets to avoid conflicts to lastest clients.
+	* Added GC_VENOMPRESSURE skill.
+	* Fixed clif_parse_ProduceMix. Bug report 224.
+	* Improved Runes cooldown control, adjusted to the official one.
+	* Minor fix in SC__SHADOWFORM. Moved to a place between freeblock_lock/freeblock_unlock to avoid conflict.
+
+03/02/2010
+	r221 [pakpil]
+	* Fixed clif_guildstorageitemadded packet that was malfuntioning when you put an item in the storage with lastest client.
+
+	r220 [pakpil]
+	* Added new clif_tradeadditem packet. 0xe9 -> 0x80f.
+
+02/28/2010
+	r219 [Rytech]
+	*Fixed the gm_all_skill config setting. You can now safely use it.
+	-Enableing this setting will give you access ONLY to all 1st and 2nd class skills.
+	-You can get 3rd class skills too, but only for the 3rd job your playing as.
+	-Thankyou Pakpil for the help. =D
+
+	r218 [pakpil]
+	* Fixed pc_skillup and pc_jobchange that were malfunctioning. Bug report 193.
+
+	r217 [Jobbie]
+	* Mado Gear is usable without Madolicense skill upgraded. Without the license your movement speed will be 50%.
+	- When in Mado Gear Blacksmith and Mastersmith skills are unusable.
+	* Cannot use the skill Return to El Dicaste when mounted in Mado.
+	* Some clean up to the state "ridingwarg" and "warg".
+	* Minor clean up to skill Cross Ripper Slasher avoiding redundant sc checking.
+	* Fix the bonus given of Tooth of Warg skill.
+	* Minor fix to NC_TRAININGAXE, GN_REMODELING_CART, GN_TRAINING_SWORD hitrate bonus.
+	* NC_TRAININGAXE should work with Mace.
+	* Minor fix to new poison items and in const.txt. 
+
+02/27/2010
+	r216 [pakpil]
+	* Minor fix in GC_POISONINGWEAPON. Removed extra sound effect when the weapon is poisoned. Bug report 209.
+	* Minor fix in GC_ROLLINGCUTTER. The counter is reseted when you move from your place. Bug report 209.
+
+02/26/2010
+	r215 [pakpil]
+	* Added missing file in r214.
+
+	r214 [pakpil]
+	* Added GC_RESEARCHNEWPOISON, GC_CREATENEWPOISON and GC_POISONINGWEAPON skills.
+	- Added all poisons but still need more test.
+	- Added new file with all skill that Magic Mushroom should cast. Magic Mushroom don't cast skill in mobs. Still need more test.
+	* Improved clif_skill_fail packet to use it propertly with some skills. Still need more fix.
+	* Improved makerune, it's uses skill_produce_mix_list right now instead clif_rune_create_list.
+
+02/24/2010
+	r213 [Rytech]
+	*Added official names for mechanic FAW monsters. Also properly assigned each elemental version to each ID.
+	-You can see what element tower belongs on what ID by looking at the lub files.
+	-Also switched the skills used for 2 of the magic decoy towers.
+	*Corrected a incorrectly set ID for SO_ENDMARK in the skill_require_db.
+
+	r212 [pakpil]
+	* Added GC_WEAPONBLOCKING, GC_WEAPONCRUSH and GC_COUNTERSLASH skills.
+
+02/23/2010
+	r211 [pakpil]
+	* Added GC_CROSSIMPACT, GC_CLOAKINGEXCEED, GC_ROLLINGCUTTER and GC_ROLLINGCUTTER skills.
+	* Fixed WM_POEMOFNETHERWORLD. Added missing entry. Bug report 199.
+
+	r210 [pakpil]
+	* Fixed a issue in clif_set_unit_idle that was causing conflics.
+
+02/22/2010
+	r209 [pakpil]
+	* Added WM_RANDOMIZESPELL skills. All Wanderer/Minstrell skills are rewrited.
+
+	r207 [Jobbie]
+	* Minor fix to Strip Accessory. No need for another checking if the target is BL_MOB since "(!sd)" part is already doing it.
+	- Strip chance was 12+2*skillLV but still needs the official value of casters dex and targets dex w/c affecting the strip success chance.
+
+02/21/2010
+	r206 [pakpil]
+	* Fixed WL_EARTHSTRAIN that was dealing damage through walls and adjusted its behavior.
+
+	r205 [pakpil]
+	* Fixed RK_MILLENNIUMSHIELD packet. Bug report 192.
+
+02/20/2010
+	r204 [pakpil]
+	* Fixed some Rune Knight skill times.
+	* Fixed some Shadow Chaser skill damage type that was wrong.
+	* Added SC_REUSE_REFRESH as cooldown for RK_REFRESH according to the official behavior.
+	* Added SC_REUSE_COMET as temproray cooldown until we find a good way to handler it.
+	* Fixed Fear status change.
+	* Fixed SC_STRIPACCESORY skill.
+
+02/19/2010
+	r203 [pakpil]
+	* Fixed fame ranking follow up r200. Sry.
+	* Fixed SC_DEADLYINFECT and SC_INVISIBILITY skills. Bug report 152.
+	* Fixed Shado Chasers's Mascarades range. Bug report 152.
+	* Updated SC and SI lists.
+	* Optimized WM_SATURDAY_NIGHT_FEVER according to the official behavior.
+	* Cleaned Unit_id enum.
+
+02/17/2010
+	r202 [pakpil]
+	* Fixed SC_REPRODUCE. This was memorizing a wrong skill id on certain skills.
+
+	r201 [pakpil]
+	* Minor fixed in WM_SEVERE_RAINSTORM skill.c
+	* Reverted casting reduction on Bolts.
+
+	r200 [pakpil]
+	* Fixed fame ranking.
+	* Fixed SC_FREEZING and SC_BURNING that were stacking. We still need more info about it.
+
+	r197 [pakpil]
+	* Fixed SC_REPRODUCE. Bug report 165.
+	* Fixed some issues in r196 that make conflicts with cygwin.
+
+02/16/2010
+	r196 [pakpil]
+	* Added some Wanderer/Minstrel skills: WM_VOICEOFSIREN, WM_DEADHILLHERE, WM_SIRCLEOFNATURE, WM_GREAT_ECHO,
+		WM_SONG_OF_MANA, WM_DANCE_WITH_WUG, WM_SOUND_OF_DESTRUCTION, WM_SATURDAY_NIGHT_FEVER,
+		WM_LERADS_DEW, WM_MELODYOFSINK, WM_BEYOND_OF_WARCRY, WM_UNLIMITED_HUMMING_VOICE.
+	* Reverted clean up on some defines in pc_gainexp. Take care with these, if you remove it the exp gained will be
+	  shown twice when "display_exp" is "yes". This option should be changed or removed.
+
+02/15/2010
+	r195 [Jobbie]
+	* Sorcerer Skills Update.
+		- Striking now will drain sp during its duration and uses Endow skill as its bonus ATK.
+		- Fixed the duration and re-use delay of Warmer.
+		- Warmer should affect all not only allies.
+		- Updated certain skills to its proper damage calculation as of the present info.
+	* Earth Strain Update.
+		- Adjusted its stripping rate to official and its stripping behavior.
+		- Adjusted its area of effect as of official info.
+	* Added RETURN_TO_ELDICASTES skill.
+	* Fixed burning status which makes you paralyze during its duration.
+	* Earth Grave and Arrow Storm should affect hidden targets.
+	* Fixed when mounted and equipped with weapon a client error appears.
+
+02/14/2010
+	r194 [Jobbie]
+	* Fixed the success chance of auto casting Spear Boomerang when using Hundred Spear.
+
+	r193 [Jobbie]
+	* Added the missing configuration for renewal cast setting and camouflage setting in skill.conf.
+	* Fixed some mechanic items.
+	* Disable Guillotine Cross skills in skill_db so there will no confuseness why its not working. To be recoded soon.
+	* Fixed Aimedbolt not properly dealing the total damage when enemy is in immobile status.
+	* Fixed Ranger Traps activation area.
+	* Fixed Mado License bonus damage calculation.
+	* When mounted into a warg you cannot use magic scrolls.
+	* Cleaned up some defines in pc_gainexp.
+	* Moved Warg Mastery and Warg Dash fail message into skill_check_condition_castbegin
+	* Removed Warg Dash movement speed calculation while dashing as it uses your current movement speed.
+	* Removed the 50% cast time reduction of Bolts seems its not really 50% as its reduction in renewal.
+	* Added a setting which you can place the skill that has a full variable and fixed cast time. 
+
+02/11/2010
+	r192 [pakpil]
+	* Fixed a mistake in SC_REPRODUCE.
+	* Added 50% casting time reduction on Bolts in renewal.
+	* Fixed a mistake in AB_ANCILLA.
+
+	r191 [pakpil]
+	* Updated SCs in const.txt
+
+	r189 [pakpil]
+	* Fixed SC_INVISIBILITY:
+		- Fixed its duration.
+		- Shouldn't lose the state when the SC hits.
+		- Fixed ASPD lost, was too high. Still need the official value.
+
+02/10/2010
+	r188 [pakpil]
+	* Fixed clif_displayexp that was displaying same exp on Base Exp and Job Exp won. Bug report 149.
+	* Fixed SC_INVISIBILITY duration.
+	* Fixed SC_REPRODUCE and SC_AUTOSHADOWSPELL that should set the reprodue skill level as current SC_REPRODUCE level.
+	* Added all new official standing/spawn and walking packets (0x7f7, 0x7f8 and 0x7f9). Take care with your PACKETVER.
+
+02/10/2010
+	r187 [Rytech]
+	*Added the reballanced headgears to the item_db2.
+	- 2 versions now exist. V1 is the one used when the headgears when released and contain the skill bonuses.
+	- V2 is the version with all the latest ballances.
+	- V1 of the headgears are all disabled by defult and V2 is all enabled.
+	- Should I just remove the old ones?
+
+02/09/2010
+	r186 [pakpil]
+	* Fixed vending.
+
+02/09/2010
+	r185 [pakpil]
+	* Added WM_POEMOFNETHERWORLDS skill.
+	* Fixed WM_SEVERE_RAINSTORM skill. Should be working as intended.
+	* Fixed standing packet.
+	* Fixed a mistake in pc_jobchange.
+	* Fixed DeepSleep status def according with some test in kRO-RE.
+
+02/08/2010
+	r184 [pakpil]
+	* Fixed clif_displayexp packet. This should show won and lost experience.
+	* Fixed clif_vendinglist. Should use 0x800 packet instead 0x801.
+
+02/03/2010
+	r176 [Rytech]
+	*Added skill max level, SP requirements, and names for Sorcerer's summon skills.
+	-I also enabled the 6 skills as their's enough support for them to appear.
+	-Latest clients do support these tags, but no official icons has been released yet. So take caution for now.
+	-Im now ready for its official release. =D
+
+02/04/2010
+	r176 [pakpil]
+	* Fixed RK_RUNEMASTERY.
+	- Fixed the max amount of each rune you can carry.
+	- Fixed the ASPD bonus while using Fighting Spirit that should add +4 ASPD if you have Rune Mastery at level 10.
+	* Fixed SC_FEINTBOMB. This skill have been adjusted to the official behavior.
+	* Fixed WM_REVERBERATION. It can be destroyed by attacking it with ranged skills or magic. It takes 1 damage from everything.
+
+02/02/2010
+	r175 [pakpil]
+	* Fixed RK_RUNEMASTERY that was crashing map_server at level lowdest than 10 while crafting.
+	* Fixed SC_AUTOSHADOWSPELL that shouldn't spell physical skills. Bug report 131.
+
+02/01/2010
+	r174 [Rytech]
+	*Filled in the missing spot for the Guillotine Cross exclusive headgear.
+	-It appears to be Phantom Menace that gets the %10 increase. Thanks Executor.
+
+02/01/2010
+	r173 [Rytech]
+	*Added completed set of exclusive 3rd job headgears.
+	-Note: I need the name of the skill that damage is boosted for the Guillotine Cross.
+	-Note 2: I didnt see any bonus to increase just ranged damage, so I just added a % increase.
+	-No worry since jobs like Minstreal and Wanderer will use only bow, instruments, and wips.
+	-ID 5759 exists in the client, but the item has not been released. So its disabled for now.
+
+02/01/2010
+	r172 [pakpil]
+	* Added recoded SC_FEINTBOMB.
+
+01/31/2010
+	r170 [pakpil]
+	* Fixed WA_SWING_DANCE, WA_SYMPHONY_OF_LOVER, WA_MOONLIT_SERENADE, MI_RUSH_WINDMILL, MI_ECHOSONG, MI_HARMONIZE that are not stackable.
+	* Fixed WA_SYPMPHONY_OF_LOVER that affect Mdef instead Mdef2.
+	* Fexed WA_SWINGDANCE that have a different value to ASPD and SPEED.
+	* Added new packet that show exp you gain/lost in  the official server.
+
+01/31/2010
+	r168 [Jobbie]
+	* Minor fix on eAthena merge. follow up r167
+	* Minor fix on Reverberation which calculation to damage not added in battle.c
+	* Reverberation, Metallic Sound and Severe Rainstorm should take weapons element.
+
+01/30/2010
+	r167 [Jobbie]
+	* Merge eAthena Updates upto r14328(excluding those stable updates).
+
+	r166 [pakpil]
+	* Fixed max_lv and aura_lv in battle_confing that was caussing problems with 3rd jobs auras. Bug report 99.
+	* Added WA_SWING_DANCE, WA_SYMPHONY_OF_LOVER, WA_MOONLIT_SERENADE, MI_RUSH_WINDMILL, MI_ECHOSONG, MI_HARMONIZE and WM_METALICSOUND skills.
+	* Added support to packets 0x2ed and 0x2ee that was the lastest spawn/standing packet before the last change.	
+	* Minor fix in SC_BITE and SC_ELECTRICSHOKCKER that reduce tick directly instead by percentage.
+
+01/228/2010
+	r165 [Rytech]
+	*Added in the ID's for the 3rd job exclusive headgears.
+	-Ive given them temporary names like RK_Headgear to easly identify each headgear and will later be given official names.
+	-Its safe to call up the items through the @item command, but make sure you have a 2010-1-26 client when doing so.
+	-These headgears are not ready for player use as their not fully configed.
+	-Their currently equiptable by any job, but will be set to their actural exclusive jobs soon.
+	-I have NO IDEA what the view ID's for these headgears could be. I never had to do headgears before. If anyone knows them, please message me.
+
+01/28/2010
+	r164 [pakpil]
+	* Fixed a mistake in r162. Sorry 8)
+
+01/28/2010
+	r163 [pakpil]
+	* Minor fix in my last commit.
+
+01/28/2010
+	r162 [pakpil]
+	* Fixed SC_SHADOWFORM that was causing crash servers. Bug report 100.
+	* Fixed WM_SEVERE_RAINSTORM, adjusted to the official behavior.
+	- It uses WM_SEVERE_RAINSTORM_MELLE to deal the damage and WM_SEVERE_RAINSTORM to set the skill unit.
+
+01/28/2010
+	r160 [Jobbie]
+	* Updated some behavior of Sorcerer skills according to latest update information in iRO wiki.
+	* Remove SC_DIAMONDUST and replaced with SC_CRYSTALIZE to fit the information which is used as the new status for Diamon Dust.
+	* Cloudkill now used its own status icon.
+	* Fixed when riding warg you can use basic attack
+
+01/26/2010
+	r159 [Jobbie]
+	* Minor fix to Arms Cannon to behave same on official. Should be ground target skills.
+	* Minor fix on Repair skill which cannot heal another targets mado.
+	* Minor fix to Analyze skill the animation should be on the target not on the caster.
+
+	r156 [pakpil]
+	* Fixed pc_skillup that wasn't working propertly with all extended class.
+
+	r154 [pakpil]
+	* Added missing code in r152.
+	* Fix in SC_BLOODYLUST, SC_MAELSTROM and SC_CHAOSPANIC to adjust these skills to the official behavior.
+		- SC_BLOODYLUST has its own SI and its effect disappears when you left the skill range. No status icon.
+		- SC_CHAOSPANIC uses OPT2_SIGNUMCRUCIS.
+		- SC_MAELSTROM don't shows the skill name when absorb magics.
+
+01/25/2010
+	r152 [pakpil]
+	* Added SC_MAELSTROM skill.
+	* Fixed SC_MANHOLE that was allow skill attacks to targets under this status. Bug report 70.
+
+01/25/2010
+	r150 [pakpil]
+	* Added SC_FATALMENACE skill working as intended.
+	* Minor fix in SC_BLOODYLUST skill.
+
+01/25/2010
+	r149 [Jobbie]
+	* Added Mechanic Skills NC_HOVERING and NC_ANALYZE working as intended.
+
+01/24/2010
+	r147 [Jobbie]
+	* Minor fix on NC_REPAIR requirements.
+
+	r146 [Jobbie]
+	* Added Mechanic Skills working as intended.
+	- NC_MADOLICENCE, NC_BOOSTKNUCKLE, NC_PILEBUNKER, NC_VULCANARM, NC_FLAMELAUNCHER, NC_COLDSLOWER
+	- NC_ARMSCANNON, NC_ACCELERATION, NC_SELFDESTRUCTION, NC_INFRAREDSCAN, NC_REPAIR, NC_TRAININGAXE,
+	- NC_RESEARCHFE, NC_AXEBOOMERANG, NC_POWERSWING, NC_AXETORNADO.
+	* Minor fix to additional movement speed on when mounting animals.
+	* Minor fix to Adoramus which don't have duration when abnormal status affects.
+
+	r145 [pakpil]
+	* Merged pc_isriding function from stable.
+	* Minor fix in clif_addskill that was cause some problems with SC_REPRODUCE and RG_PLAGIARISM.
+	* Fixed mounting dragons that was causing uses dragons skills without dragon.
+	* Merged "warg_can_falcon" from trunk.
+
+	r144 [Jobbie]
+	* Aimedbold and ArrowStorm should carry the weapon element.
+	* Fixed no gemstone state when using Mistress card.
+	* Fixed Enchant Blade should not target enemy.
+	* Fixed White Imprison should not target non-enemy.
+
+	r143 [pakpil]
+	* Fixed WL_FROSTMISTY and WL_JACKFROST that aren't working propertly.
+	- Bug report 81.
+
+01/23/2010
+	r142 [Jobbie]
+	* ArchBishop Update:
+	- Fixed damage calculation of Adoramus and Judex. Judex should have a sub hits of 3.
+	- Redone Clementia, Canto, Praefatio, and Coloceo Heal to display only skill name above the head.
+	- Ancilla and Epiclesis used now its official fail message.
+	* Ranger Update:
+	- Added RA_SENSITIVEKEEN skill.
+	- Fixed Camouflage not displaying skill name above the head.
+	- Fixed Electricshocker and Wugbite status which should be reduced by 1sec every 10 agi.
+	- Fixed when mounting a warg item skills cannot be used.
+	- Aimedbolt and Arrowstorm can be used without a bow.
+	* Cleaned up some whitespace.
+	* Fixed some map_freeblock error caused by some skills.
+
+	r141 [Rytech]
+	* Fixed max level to allow up to level 1000 for trunk.
+
+	r140 [pakpil]
+	* Fixed SC_GROOMY that wasn't removed mounts.
+	* Fixed SC_MANHOLE that was allowing attack while was under this sc.
+
+	r138 [pakpil]
+	* Added WM_REVERBERATION and WM_DOMINION_IMPULSE skills.
+	* Minor fix in SC_AUTOSHADOWSPELL that cause you can't move if you haven't copied skills.
+	* Minor fix in the new clif_skillcasting packet.
+
+01/22/2010
+	r135 [pakpil]
+	* Added WM_LULLABY_DEEPSLEEP skill working as intended.
+	* Minor fix in SO_ARRULLO to show the status propertly.
+	* Minor fix in SC_DEADLYINFECT. Removed 2 SC that can't be spreaded.
+
+
+01/21/2010
+	r134 [Rytech]
+	*Fixed typos for ARRULLO. Was typed as ARULLO accidently.
+
+01/21/2010
+	r133 [Rytech]
+	*Added 6 new Sorcerer skills as place holders
+	-They will remain disabled until the data is fully added to clients
+	*Updated SP requirements for Sorcerer skills
+	*Changed Genetics Fire Expansion's Smoke Powder, Tear Gas, and Acid Multi ID skills from 5 to 1.
+	-Reading the skill desc's showed me that they will have the same effect no matter what and arnt affected by anything
+
+01/21/2010
+	r132 [pakpil]
+	* Added some missing lines.
+	* Added WM_SEVERE_RAINSTORM skill working as intended.
+	* Added the new clif_delitem packet. Take care with your PACKETVER
+	* Merged the new clif_damage packet from stable.
+	* Re-fixed SC_BLOODYLUST that does not affect the caster.
+	* Minor fix in SC_INVISIVILITY.
+
+01/21/2010
+	r131 [Rytech]
+	*Full checkup and updates to trunk branch
+	-Corrected job MAP ID's in the const.txt
+	-Updated the item_db2, mob_db2, job_db2, skill_require_db, skill_tree with all data from the stable branch
+	-Updated the skill_cast_db, skill_db by adding missing lines and cleaning up
+	-Readded Gangsi, Death Knight, and Dark Collector job mask support for items
+	-Add a skill tag to skill.h
+
+01/21/2010
+	r130 [pakpil]
+	* Fixed some mistake in SC_SHADOWFORM.
+	* Minor typo fixed.
+	* Minor fix in pc_setriding and pc_isriding.
+
+01/21/2010
+	r128 [pakpil]
+	* Fixed SC_AUTOSHADOWSPELL. bug report 54.
+
+01/17/2010
+	r117 [Jobbie]
+	* Fixed Groomy, Weakness, Unlucky status regarding its calculation.
+	* Fixed Weakness should not strip weapon if the player is under chemical protection.
+	* An initialization of "0" to sc_def to avoid warning message in some case.
+
+	r116 [Jobbie]
+	* Fixed an issue which other client from 20091118 doesn't show cast bar.
+	* Fixed the define client version in mmo.h which causes client crash when someone pm'ed you.
+	* Fixed a typo on rev108 commit which causes compile errors.
+
+01/15/2010
+	r107 [LimitLine]
+	* Added chance to change enemy's element to Poison with Cloud Kill.
+	* Fixed Cloud Kill not dealing damage.
+	* Changed Vacuum Extreme's unit ID to the correct one.
+	* Changed Warmer's unit ID to the correct one.
+	* Other minor changes.
+
+	r106 [LimitLine]
+	* Now spells used trough Reading Spellbooks will consume the correct amount of Preserve points (before: every skill consumed only one, regardless).
+	- You can change the number of preserve points a skill takes up in db/spellbook_db.txt
+	* Fixed my last changelog entries. Sorry.
+
+	r105 [LimitLine]
+	* Fixed Chain Lightning hitting allies.
+	* Fixed Freezing duration trough Frost Misty.
+	* Fixed Demonic Fire hitting everyone.
+
+01/11/2010
+	r100 [Jobbie]
+	* Added RA_CAMOUFLAGE skill.
+	* Added renewal_cast_enable setting. Read inside skill.conf about its functionality.
+	* Fixed damage calculation for Firing, Icebound and Clusterbomb Trap.
+	* Cleaned up unit function of Hunter and Ranger Traps.
+	* Removed Freeze and Stone status in status_change_spread as its not included to the status to be spreaded.
+	* Fixed items that are not updated to the recent job system.
+
+01/09/2010
+	r97 [pakpil]
+	* Minor fix in my last commit. Sorry.
+
+	r96 [pakpil]
+	* Added skill SC_AUTOSHADOWSPELL.
+
+01/08/2010
+	r95 [pakpil]
+	* Added Shadow Chaser's skills: SC_REPRODUCE, SC_BLOODYLUST.
+	* Minor fix in RK_GIANTGROWTH.
+	* Added two packets: 
+	- clif_addskill to add a skill to the skill info window
+	- clif_skillinfo_delete to remove a skill from the skill info window.
+
+	r94 [pakpil]
+	* Added some Shadow Chaser's skills: SC_BODYPAINT, SC_INVISIBILITY, SC_DEADLYINFECT, SC_ENERVATION, SC_GROOMY,
+	  SC_IGNORANCE, SC_LAZINESS, SC_UNLUCKY, SC_WEAKNESS, SC_STRIPACCESSARY, SC_MANHOLE, SC_SIMENSIONDOOR and SC_CHAOSPANIC.
+
+12/29/2009
+	r85 [pakpil]
+	* Added SC_STRIPACCESSARY.
+	* Minor fix in SC_SHADOWFORM.
+	* Minor fix in my last commmit.
+
+	r84 [pakpil]
+	* Fixed the skillup control from my last commit. Sorry.
+	* Added the new clif_skillcasting packet with the info recompilled from RE server.
+
+12/28/2009
+	r83 [Jobbie]
+	* Merge eAthena Updates upto r14215
+
+	r82 [pakpil]
+	* Added the new official skillup control. Seems to be working as intended.
+	- Added new packet 0x7e2 that shows a message from msgstringtable.txt and pass an integer as value.
+		[NOTE: Take care with this packet, if you select a message with %s instead %d clients'll crash.]
+	- Added new function to send packet 0x291 that shows a message from msgstringtable.txt.
+	- Fixed all functions that use packet 0x291.
+
+12/26/2009
+	r78 [Jobbie]
+	* Added and Confirmed some official UNT_* of new skills.
+	* Added and Updated some SI_*'s that is used by skills and named it to its official value name.
+	* Updated some skills to use its official SI's.
+	* Fixed Comet to use 0x1de packet to display its effect rather than to use special effect.
+	* Fixed White Imprison.
+	- When status is active you cannot use items or skills.
+    	- Cannot target non-enemy unit.
+
+12/24/2009
+	r74 [pakpil]
+	* First implementation of SC_SHADOWFORM skill.
+
+12/24/2009
+	r73 [Jobbie]
+	* When mounted with warg and used warg strike in WoE maps it will fail.
+	* Fixed a typo in GN_CARTCANNON.
+
+12/23/2009
+	r72 [Jobbie]
+	* Fixed burning causing map-error. Sorry I messed up the code. (followed up r70)	
+
+	r71 [Jobbie]
+	* Quick cleanuped. Did not notice there is a remain of code from scratch. (followed up r70)
+
+	r70 [Jobbie]
+	* Added the rest of Rangers skills. Does not include Camouflage, Sensitivekeen and Fearbreeze.
+	* Removed Electric Shocker from Researchtrap list to increase range. Should not affect boss monster.
+	* Fixed Epiclesis not giving properly the MaxHP bonus.
+
+	r69 [pakpil]
+	* Fixed Burning status:
+	- Map-server crash when someone dies with Burning.
+	- Burning didn't show its sc icon propertly.
+
+12/21/2009
+	r66 [Jobbie]
+	* Fixed an issue in battle_attr_fix causing map-server to crash.
+
+	r64 [pakpil]
+	* Initialized Shadow Chaser's skills implementation. Started with SC_TRIANGLESHOT.
+
+12/19/2009
+	r61 [Jobbie]
+	* Implemented renewal cast time settings to enable fixed and variable cast time.
+	* Renovatio's cast time is not affected by dex.
+	* Sacrament( fixed cast time reduced ) and Freezing( fixed cast time increased ) are now functional.
+	* Fixed the AfterCastDelay? which is not showing the paw icon and did not trigger after cast delay of skill.
+
+	r60 [Jobbie]
+	* Added RA_WUGDASH and RA_RESEARCHTRAP skill.
+	* Fixed electric shocker and cluster bomb their unit must not affected by arrow shower.
+	* Fixed usable skills while riding a warg.
+
+12/13/2009
+	r54 [Jobbie]
+	* Quick fixed while merging with latest eA update something messed up.
+	
+	r53 [Jobbie]
+	* Merge eAthena Updates upto r14198
+
+11/29/2009
+	r40 [Jobbie]
+	* Added Ranger Trap only related skills.
+	- Changes:
+		* Icebound and Firing Trap deals neutral damage to enemy based on official info.
+		* Clusterbomb is a MiSC type of attack same to Icebound and Firing Trap.
+		* Applied Clusterbomb, Firing, Icebound damage formula based of official info from iROwiki.
+	* Added a commented missed OPT_BURNING display icon implementation. 
+
+11/28/2009
+	r39 [Jobbie]
+	* Added GN_REMODELING_CART cart weight bonus which is missed during implementation on r33.
+	* Follow up implementation for GN_TRAINING_SWORD for its bonus hitrate. Follow up r33.
+	* Switch packet_db to default and mmo.h to RagRE compatible so that RagexeRE client will be allowed.
+
+11/26/2009
+	r36 [LimitLine]
+	* Updated Sorcerer cast times, cooldowns and aftercast delays according to http://forums.irowiki.org/showpost.php?p=559786&postcount=437 .
+	* Next, I'll update their behaviors and other things I left out.
+
+	r35 [LimitLine]
+	* Fixed an error when compiling char-server in TXT mode.
+	* Fixed hitrate bonus for Cart Remodeling, thanks to Spiritual_Kid.
+	- http://www.eathena.ws/board/index.php?s=&showtopic=233391&view=findpost&p=1280383
+	* Fixed Striking's weapon damage bonus, once again thanks to Spiritual_Kid.
+	- http://www.eathena.ws/board/index.php?s=&showtopic=233391&view=findpost&p=1280383
+
+	r34 [LimitLine]
+	* Restored scripts_main.conf. Sorry =x
+
+	r33 [LimitLine]
+	* Added Sorcerer and Genetic Skills.
+	- Fire Expansion Lv1-4 still being worked on.
+	- A few skill formulas and damage increments based on base level are custom. Look inside battle.c to find out which.
+	- Sling Item, Change Material, Special Pharmacy not included.
+	- Cast times and cooldowns are also custom. I'll update those when I get official info about them.
+	* Minor cleanup in skill_db.txt and skill_cast_db.txt
+	- Made all skills not yet implemented passive and removed them from skill_cast_db.
+
+	r32 [pakpil]
+	* Added all Rune Knight skills rewrited.
+	* Fixed WL_SMUMMON... skills that wasn't showing spheres correctly.
+	* Fixed pc_setoption, pc_setriding and pc_isriding.
+	- Removed #define pc_isriding and added a new function to check if a pc is riding bassed in its class. (test version).
+
+11/15/2009
+	r15 [LimitLine]
+	* Fixed Soul Expansion not doing doubled damage when under White Imprison.
+
+	r13 [LimitLine]
+	* Added rewritten Arch Bishop and Warlock skills to the trunk/rewrite folder.
+	- Things missing: Editted item_db.txt with support for third class bitmasks.
+		Current job system of stable/r13890, which is cleaner and more functional.
+	- BEWARE! Everything in the trunk folder should be used for testing purposes only,
+		though we do need your help reporting any bugs you might find so we can merge it to
+		their respective /stable folder.
+	- item_db.txt is not yet editted for items to work with third class characters. Please bear with me.

@@ -1,0 +1,61 @@
+Credit:
+Judas ( http://chronicdestiny.blogspot.com/ )
+
+Diff Guide
+
+(1)Grab the latest client from here
+http://svn6.assembla.com/svn/ClientSide/Diff_Project/kRO/RagexeRE/
+
+(1b) Both the .DIFF and the .RAR
+Extract the .rar, and make sure the other file is saved as a .diff
+
+(2)Grab the diff tool here
+http://svn6.assembla.com/svn/ClientSide/Tools/K3dtDiffpatcher.exe
+
+(3) Open the K3dtDiffpatcher and open your diff file. Usually the corresponding client will be automatically be placed into the diff patcher when you select your diff file.
+
+(4) When you press continue, you will be presented with a screen to place your options. (>>) Means the options that will be used in your client. While (<<) means to remove the options from your client. Once done, click patch and your client will be available now and should have an ending similar to x_RagexeRE_patched. ------------------------------------ ON BY DEFAULT
+
+[Fix]_Disable_HShield_(Recommended)
+Change_Gravity_Error_Handler
+Custom_Window_Title
+Translate_Client_In_English
+Enforce_Official_Login_Background
+Fix_Camera_Angles
+Skip_License_Screen
+Read_Data_Folder_First
+Read_msgstringtable.txt
+Use_Plain_Text_Descriptions
+Disable_1rag1_&_1sak1
+Disable_RagexeRE_Filename_Check
+Invalid_Email_Fix
+KOREA_ServiceType_XML_Fix
+Disable_Encryption_in_Login_Packet
+ON__by_default_/Shopping
+ON__by_default_/Window
+
+------------------------------------
+Things To Add:
+
+Extended_Chat_Box
+Extended_PM_Box
+Extended_Chat_Room_Box
+Enable_Quest_Window
+Disable_Swear_Filter
+Only_First_Login_Background
+Ignore_Changed_Alert_Messages
+Ignore_Missing_File_Errors
+Ignore_Missing_Palette_Errors
+Show_All_Buttons_In_Login_Windows
+Skip_Service_Select
+Use_Ragnarok_Icon
+Unlimited_Loading_Screens
+Enable_127_Hairstyles
+Enable_Multiple_GRFs (Remove Read Data Folder First and Add This to Read GRF First)
+Increase_Headgear_ViewID_to_2000
+Enable_DNS_Support
+Use_shared_palettes
+
+------------------------------------
+
+(7) Anything else, you can add to customize your client. But the above should be fine without errors. Remember again, that to read GRF you must remove "Read Data Folder First"

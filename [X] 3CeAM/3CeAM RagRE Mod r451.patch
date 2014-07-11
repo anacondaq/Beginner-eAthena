@@ -1,0 +1,359 @@
+Index: src/char/char.c
+===================================================================
+--- src/char/char.c	(revision 451)
++++ src/char/char.c	(working copy)
+@@ -726,6 +726,7 @@
+ 	p->hom_id = tmp_int[44];
+ 	p->last_point.map = tmp_int[45];
+ 	p->save_point.map = tmp_int[46];
++	memcpy(p->last_map, tmp_str[1], MAP_NAME_LENGTH_EXT);
+ 
+ #ifndef TXT_SQL_CONVERT
+ 	// Some checks
+@@ -1794,6 +1795,9 @@
+ 	mapindex_getmapname_ext(mapindex_id2name(p->last_point.map), (char*)WBUFP(buf,108));
+ 	offset += 16;
+ #endif
++#if PACKETVER >= 20100727
++	offset -= 16;
++#endif
+ 	return 106+offset;
+ }
+ 
+Index: src/char_sql/char.c
+===================================================================
+--- src/char_sql/char.c	(revision 451)
++++ src/char_sql/char.c	(working copy)
+@@ -838,7 +838,7 @@
+ 		"`char_id`,`char_num`,`name`,`class`,`base_level`,`job_level`,`base_exp`,`job_exp`,`zeny`,"
+ 		"`str`,`agi`,`vit`,`int`,`dex`,`luk`,`max_hp`,`hp`,`max_sp`,`sp`,"
+ 		"`status_point`,`skill_point`,`option`,`karma`,`manner`,`hair`,`hair_color`,"
+-		"`clothes_color`,`weapon`,`shield`,`head_top`,`head_mid`,`head_bottom`,`rename`"
++		"`clothes_color`,`weapon`,`shield`,`head_top`,`head_mid`,`head_bottom`,`rename`,`last_map`"
+ 		" FROM `%s` WHERE `account_id`='%d' AND `char_num` < '%d'", char_db, sd->account_id, MAX_CHARS)
+ 	||	SQL_ERROR == SqlStmt_Execute(stmt)
+ 	||	SQL_ERROR == SqlStmt_BindColumn(stmt, 0,  SQLDT_INT,    &p.char_id, 0, NULL, NULL)
+@@ -874,6 +874,7 @@
+ 	||	SQL_ERROR == SqlStmt_BindColumn(stmt, 30, SQLDT_SHORT,  &p.head_mid, 0, NULL, NULL)
+ 	||	SQL_ERROR == SqlStmt_BindColumn(stmt, 31, SQLDT_SHORT,  &p.head_bottom, 0, NULL, NULL)
+ 	||	SQL_ERROR == SqlStmt_BindColumn(stmt, 32, SQLDT_SHORT,	&p.rename, 0, NULL, NULL)
++	||	SQL_ERROR == SqlStmt_BindColumn(stmt, 33, SQLDT_STRING, &p.last_map, sizeof(p.last_map), NULL, NULL)
+ 	)
+ 	{
+ 		SqlStmt_ShowDebug(stmt);
+@@ -931,7 +932,7 @@
+ 		"`str`,`agi`,`vit`,`int`,`dex`,`luk`,`max_hp`,`hp`,`max_sp`,`sp`,"
+ 		"`status_point`,`skill_point`,`option`,`karma`,`manner`,`party_id`,`guild_id`,`pet_id`,`homun_id`,`hair`,"
+ 		"`hair_color`,`clothes_color`,`weapon`,`shield`,`head_top`,`head_mid`,`head_bottom`,`last_map`,`last_x`,`last_y`,"
+-		"`save_map`,`save_x`,`save_y`,`partner_id`,`father`,`mother`,`child`,`fame`,`rename`"
++		"`save_map`,`save_x`,`save_y`,`partner_id`,`father`,`mother`,`child`,`fame`,`rename`,`last_map`"
+ 		" FROM `%s` WHERE `char_id`=? LIMIT 1", char_db)
+ 	||	SQL_ERROR == SqlStmt_BindParam(stmt, 0, SQLDT_INT, &char_id, 0)
+ 	||	SQL_ERROR == SqlStmt_Execute(stmt)
+@@ -984,6 +985,7 @@
+ 	||	SQL_ERROR == SqlStmt_BindColumn(stmt, 46, SQLDT_INT,    &p->child, 0, NULL, NULL)
+ 	||	SQL_ERROR == SqlStmt_BindColumn(stmt, 47, SQLDT_INT,    &p->fame, 0, NULL, NULL)
+ 	||  SQL_ERROR == SqlStmt_BindColumn(stmt, 48, SQLDT_SHORT,	&p->rename, 0, NULL, NULL)
++	||	SQL_ERROR == SqlStmt_BindColumn(stmt, 49, SQLDT_STRING, &p->last_map, sizeof(last_map), NULL, NULL)
+ 	)
+ 	{
+ 		SqlStmt_ShowDebug(stmt);
+@@ -1601,6 +1603,9 @@
+ 	mapindex_getmapname_ext(mapindex_id2name(p->last_point.map), (char*)WBUFP(buf,108));
+ 	offset += 16;
+ #endif
++#if PACKETVER >= 20100727
++	offset -= 16;
++#endif
+ 	return 106+offset;
+ }
+ 
+Index: src/common/mmo.h
+===================================================================
+--- src/common/mmo.h	(revision 451)
++++ src/common/mmo.h	(working copy)
+@@ -45,7 +45,7 @@
+ 
+ #ifndef PACKETVER
+ 	//#define PACKETVER	20081126
+-	#define PACKETVER 20100629
++	#define PACKETVER 20100727
+ #endif
+ // backward compatible PACKETVER 8 and 9
+ #if PACKETVER == 8
+@@ -385,6 +385,7 @@
+ #endif
+ 	bool show_equip;
+ 	short rename;
++	char last_map[MAP_NAME_LENGTH_EXT];
+ };
+ 
+ typedef enum mail_status {
+Index: src/map/clif.c
+===================================================================
+--- src/map/clif.c	(revision 451)
++++ src/map/clif.c	(working copy)
+@@ -793,34 +793,73 @@
+ #if PACKETVER >= 7
+ 	unsigned short offset = 0;
+ #endif
++#if PACKETVER >= 20091103
++	unsigned short len = 0;
++#endif
+ 	sd = BL_CAST(BL_PC, bl);
+ 
++#if PACKETVER <20091103
+ 	if(type)
+ 		WBUFW(buf,0) = spawn?0x7c:0x78;
+ 	else
++#endif
+ #if PACKETVER < 4
+ 		WBUFW(buf,0) = spawn?0x79:0x78;
+ #elif PACKETVER < 7
+ 		WBUFW(buf,0) = spawn?0x1d9:0x1d8;
+ #elif PACKETVER < 20080102
+ 		WBUFW(buf,0) = spawn?0x22b:0x22a;
++#elif PACKETVER < 20091103
++		WBUFW(buf,0) = spawn?0x2ed:0x2ee;
+ #else
+-		WBUFW(buf,0) = spawn?0x2ed:0x2ee;
++	len = (spawn?62:63) + strlen(status_get_name(bl));
++	
++	WBUFW(buf, 0) = spawn?0x7f8:0x7f9;
++	WBUFW(buf, 2) = len;
++	offset+=2;
++	buf = WBUFP(buffer,offset); //Shift the rest of elements by 2 bytes...
+ #endif
+ 
+ #if PACKETVER >= 20071106
++#if	PACKETVER < 20091103
+ 	if (type) {
+-		// shift payload 1 byte to the right for mob packets
+-		WBUFB(buf,2) = 0; // padding?
++#else
++		if(!type)
++			WBUFB(buf, 2) = 0;
++		else if (disguised(bl))
++			WBUFB(buf, 2) = 1;
++		else {
++#endif
++			switch( bl->type )
++			{
++				case BL_PC:    WBUFB(buf, 2) =  0; break; //PC_TYPE            =  0x0,
++//				case BL_:      WBUFB(buf, 2) =  1; break; //NPC_TYPE           =  0x1,
++				case BL_ITEM:  WBUFB(buf, 2) =  2; break; //ITEM_TYPE          =  0x2,
++				case BL_SKILL: WBUFB(buf, 2) =  3; break; //SKILL_TYPE         =  0x3,
++				case BL_CHAT:  WBUFB(buf, 2) =  4; break; //UNKNOWN_TYPE       =  0x4,
++				case BL_MOB:   WBUFB(buf, 2) =  5; break; //NPC_MOB_TYPE       =  0x5,
++				case BL_NPC:   WBUFB(buf, 2) =  6; break; //NPC_EVT_TYPE       =  0x6,
++				case BL_PET:   WBUFB(buf, 2) =  7; break; //NPC_PET_TYPE       =  0x7,
++				case BL_HOM:   WBUFB(buf, 2) =  8; break; //NPC_HO_TYPE        =  0x8,
++				case BL_MER:   WBUFB(buf, 2) =  9; break; //NPC_MERSOL_TYPE    =  0x9,
++				case BL_ELE:  WBUFB(buf, 2) = 10; break; //NPC_ELEMENTAL_TYPE =  0xa,
++				default:       WBUFB(buf, 2) =  1; break;
++			}
++#if	PACKETVER >= 20091103
++		}
++#endif
+ 		offset++;
+-		buf = WBUFP(buffer,offset);
++		buf = WBUFP(buffer,offset); //Shift additional 1 bytes...
++#if	PACKETVER < 20091103
+ 	}
+ #endif
++#endif
+ 
+ 	WBUFL(buf, 2) = bl->id;
+ 	WBUFW(buf, 6) = status_get_speed(bl);
+ 	WBUFW(buf, 8) = (sc)? sc->opt1 : 0;
+ 	WBUFW(buf,10) = (sc)? sc->opt2 : 0;
++#if PACKETVER < 20091103
+ 	if (type&&spawn) { //uses an older and different packet structure
+ 		WBUFW(buf,12) = (sc)? sc->option : 0;
+ 		WBUFW(buf,14) = vd->hair_style;
+@@ -829,14 +868,21 @@
+ 		WBUFW(buf,20) = vd->class_; //Pet armor (ignored by client)
+ 		WBUFW(buf,22) = vd->shield;
+ 	} else {
++#endif
+ #if PACKETVER >= 7
++#if PACKETVER < 20091103
+ 		if (!type) {
++#endif
+ 			WBUFL(buf,12) = (sc)? sc->option : 0;
+ 			offset+=2;
+ 			buf = WBUFP(buffer,offset); //Shift 2 bytes to the right for the rest of fields
++#if PACKETVER < 20091103
+ 		} else
+ #endif
++#endif
++#if PACKETVER < 20091103
+ 			WBUFW(buf,12) = (sc)? sc->option : 0;
++#endif
+ 		WBUFW(buf,14) = vd->class_;
+ 		WBUFW(buf,16) = vd->hair_style;
+ 		WBUFW(buf,18) = vd->weapon;
+@@ -847,7 +893,9 @@
+ 		WBUFW(buf,20) = vd->shield;
+ 		WBUFW(buf,22) = vd->head_bottom;
+ #endif
++#if PACKETVER < 20091103
+ 	}
++#endif
+ 	WBUFW(buf,24) = vd->head_top;
+ 	WBUFW(buf,26) = vd->head_mid;
+ 
+@@ -860,6 +908,7 @@
+ 	WBUFW(buf,28) = vd->hair_color;
+ 	WBUFW(buf,30) = vd->cloth_color;
+ 	WBUFW(buf,32) = (sd)? sd->head_dir : 0;
++#if PACKETVER < 20091103
+ 	if (type&&spawn) { //End of packet 0x7c
+ 		WBUFB(buf,34) = (sd)?sd->status.karma:0; // karma
+ 		WBUFB(buf,35) = vd->sex;
+@@ -874,17 +923,24 @@
+ #endif
+ 		return packet_len(0x7c);
+ 	}
++#endif
+ 	WBUFL(buf,34) = status_get_guild_id(bl);
+ 	WBUFW(buf,38) = status_get_emblem_id(bl);
+ 	WBUFW(buf,40) = (sd)? sd->status.manner : 0;
+ #if PACKETVER >= 7
++#if PACKETVER < 20091103
+ 	if (!type) {
++#endif
+ 		WBUFL(buf,42) = (sc)? sc->opt3 : 0;
+ 		offset+=2;
+ 		buf = WBUFP(buffer,offset); //Shift additional 2 bytes...
++#if PACKETVER < 20091103
+ 	} else
+ #endif
++#endif
++#if PACKETVER < 20091103
+ 		WBUFW(buf,42) = (sc)? sc->opt3 : 0;
++#endif
+ 	WBUFB(buf,44) = (sd)? sd->status.karma : 0;
+ 	WBUFB(buf,45) = vd->sex;
+ 	WBUFPOS(buf,46,bl->x,bl->y,unit_getdir(bl));
+@@ -893,13 +949,23 @@
+ 	if (!spawn) {
+ 		WBUFB(buf,51) = vd->dead_sit;
+ 		offset++;
+-		buf = WBUFP(buffer,offset);
++		buf = WBUFP(buffer,offset); //Shift additional 1 bytes...
+ 	}
+-	WBUFW(buf,51) = clif_setlevel(status_get_lv(bl));
+-#if PACKETVER >= 20080102
+-	WBUFW(buf,53) = (sd) ? sd->state.user_font : 0;
++	WBUFW(buf,51) = clif_setlevel(status_get_lv(bl));
++#if PACKETVER >= 20080102
++#if PACKETVER < 20091103
++	if (!type)
++#endif
++		WBUFW(buf,53) = (sd)? sd->state.user_font : 0;
++#endif
++#if PACKETVER >= 20091103
++	safestrncpy((char*)WBUFP(buf,55), status_get_name(bl), strlen(status_get_name(bl)) + 1);
++
++	return len;
++#else
++
++	return packet_len(WBUFW(buffer,0));
+ #endif
+-	return packet_len(WBUFW(buffer,0));
+ }
+ 
+ /*==========================================
+@@ -997,9 +1063,13 @@
+ 	struct status_change* sc = status_get_sc(bl);
+ 	struct view_data* vd = status_get_viewdata(bl);
+ 	unsigned char* buf = WBUFP(buffer,0);
++	bool type = !pcdb_checkid(vd->class_);
+ #if PACKETVER >= 7
+ 	unsigned short offset = 0;
+ #endif
++#if PACKETVER >= 20091103
++	unsigned short len = 0;
++#endif
+ 
+ 	sd = BL_CAST(BL_PC, bl);
+ 
+@@ -1007,14 +1077,45 @@
+ 	WBUFW(buf, 0) = 0x7b;
+ #elif PACKETVER < 7
+ 	WBUFW(buf, 0) = 0x1da;
++#elif PACKETVER < 20080102
++	WBUFW(buf, 0) = 0x22c;
++#elif PACKETVER < 20091103
++	WBUFW(buf, 0) = 0x2ec;
+ #else
+-	WBUFW(buf, 0) = 0x22c;
++	len =  69 + strlen(status_get_name(bl));
++	
++	WBUFW(buf, 0) = 0x7f7;
+ #endif
+ 
++#if PACKETVER >= 20091103
++	WBUFW(buf, 2) = len;
++	offset+=2;
++	buf = WBUFP(buffer,offset); //Shift the rest of elements by 2 bytes...
++#endif
+ #if PACKETVER >= 20071106
+-	WBUFB(buf, 2) = 0; // padding?
++	if(!type)
++		WBUFB(buf, 2) = 0;
++	else if (disguised(bl))
++		WBUFB(buf, 2) = 1;
++	else {
++		switch( bl->type )
++		{
++			case BL_PC:    WBUFB(buf, 2) =  0; break; //PC_TYPE            =  0x0,
++//			case BL_:      WBUFB(buf, 2) =  1; break; //NPC_TYPE           =  0x1,
++			case BL_ITEM:  WBUFB(buf, 2) =  2; break; //ITEM_TYPE          =  0x2,
++			case BL_SKILL: WBUFB(buf, 2) =  3; break; //SKILL_TYPE         =  0x3,
++			case BL_CHAT:  WBUFB(buf, 2) =  4; break; //UNKNOWN_TYPE       =  0x4,
++			case BL_MOB:   WBUFB(buf, 2) =  5; break; //NPC_MOB_TYPE       =  0x5,
++			case BL_NPC:   WBUFB(buf, 2) =  6; break; //NPC_EVT_TYPE       =  0x6,
++			case BL_PET:   WBUFB(buf, 2) =  7; break; //NPC_PET_TYPE       =  0x7,
++			case BL_HOM:   WBUFB(buf, 2) =  8; break; //NPC_HO_TYPE        =  0x8,
++			case BL_MER:   WBUFB(buf, 2) =  9; break; //NPC_MERSOL_TYPE    =  0x9,
++			case BL_ELE:  WBUFB(buf, 2) = 10; break; //NPC_ELEMENTAL_TYPE =  0xa,
++			default:       WBUFB(buf, 2) =  1; break;
++		}
++	}
+ 	offset++;
+-	buf = WBUFP(buf,offset);
++	buf = WBUFP(buffer,offset); //Shift additional 1 bytes...
+ #endif
+ 	WBUFL(buf, 2) = bl->id;
+ 	WBUFW(buf, 6) = status_get_speed(bl);
+@@ -1060,11 +1161,17 @@
+ 	WBUFB(buf,56) = (sd)? 5 : 0;
+ 	WBUFB(buf,57) = (sd)? 5 : 0;
+ 	WBUFW(buf,58) = clif_setlevel(status_get_lv(bl));
+-#if PACKETVER >= 20080102
+-	WBUFW(buf,60) = (sd) ? sd->state.user_font : 0;
+-#endif
++#if PACKETVER >= 20080102
++	WBUFW(buf,60) = (sd)? sd->state.user_font : 0;
++#endif
++#if PACKETVER >= 20091103
++	safestrncpy((char*)WBUFP(buf,62), status_get_name(bl), strlen(status_get_name(bl)) + 1);
++
++	return len;
++#else
+ 
+ 	return packet_len(WBUFW(buffer,0));
++#endif
+ }
+ 
+ /*==========================================
+@@ -9052,6 +9159,7 @@
+ 		sd->state.connect_new = 0;
+ 		clif_skillinfoblock(sd);
+ 		clif_hotkeys_send(sd);
++		clif_inventorylist(sd);
+ 		clif_updatestatus(sd,SP_NEXTBASEEXP);
+ 		clif_updatestatus(sd,SP_NEXTJOBEXP);
+ 		clif_updatestatus(sd,SP_SKILLPOINT);

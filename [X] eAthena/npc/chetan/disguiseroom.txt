@@ -1,0 +1,149 @@
+// ------------------------------------------------------------------------------ \\
+//        +MMMMMMMMMM$                                                            \\
+//       MMMMMMMMMM$                                                              \\
+//     ,MM,    ,MM7                                                               \\
+//              MM                                                                \\
+//             MM        MMMMMMMMM   MMM     $MMMMMMMM     MMM   MMMZ   MMM7      \\
+//            MM        MMMI   MMM   MMM   MMMM      MM    MMM   MMM    ZM        \\
+//           MM,       7MM,    MMM   MMM   MMM      ZMMM   MMM   MMM   ZZ         \\
+//          MM        7MM, MMMMMMM   MMM   MMM  , MM       MMM   MMM =M~,         \\
+//         $M         MM7      MMM   MMM   MMM  NMMMM      MMM   MMMMMMMMN=       \\
+//        ,N          MM       MMM   MMM   MMM     MNMM    MMM   MMM    ,MMM      \\
+//        MO          MM       MMM   MMM   MMM      ,MM+   MMM   MMM      MMM     \\
+//       MM           MM       MMM   MMM   MMM        MM   MMM   MMM       MM~    \\
+//      :M         ,  MM       MMM   MMM   MMM        ~M   MMM   MMM        MM    \\
+//      MM         I  MM       MMM   MMM   MMM         M   MMM   MMM        M+    \\
+//     7MMMMMMMMMMMI   M       MMM   MMM   MMM        7M   MMM   MMM        M     \\
+//     NMMMMMMMMMMM     M      MMM   MMM   MMM       ,M    MMM   MMM       M      \\
+// ------------------------------------------------------------------------------ \\
+//                                    DISGUISE ROOM                               \\
+// ------------------------------------------------------------------------------ \\
+// DO NOT PUT THESE NPC's JUST ANYWHERE, DISGUISED PLAYERS CAUSE MANY ERRORS
+// ------------------------------------------------------------------------------ \\
+// Add a warp portal to this area somewhere on your server.
+// ------------------------------------------------------------------------------ \\
+// Script - Tested and Working
+//  + // Prevented Problems \\ +
+// Players are saved inside the room once they talk to an NPC.
+// Players can only exit through the Exit Warper NPC.
+// Players cannot get out by dying or being killed.
+// Players cannot use @commands to warp themselves out of the room.
+//  + // Known Possible Flaws \\ +
+// Players can use Guild Recall to get players out. - Unpreventable
+// Players can use Marriage Skills to get players out. - Unpreventable
+// Players can use Warp Portal skills to get out. - Preventable (mapflag)
+// ------------------------------------------------------------------------------ \\
+// Go to "conf/mapflag/restricted.txt" to stop the use of Warp Portal skills
+// ------------------------------------------------------------------------------ \\
+// The Exit Warper warns players they will be banned without warning if
+// they are found outside of the disguise room disguised as a monster
+// ------------------------------------------------------------------------------ \\
+// MAPFLAGS
+// ------------------------------------------------------------------------------ \\
+// Uncomment "noskill" mapflag to stop warp portal flaw.
+//force_1-2.gat	mapflag	noskill
+force_1-2.gat	mapflag	sakura
+force_1-2.gat	mapflag	clouds2
+force_1-2.gat	mapflag	nosave	SavePoint
+force_1-2.gat	mapflag	nomemo
+force_1-2.gat	mapflag	nobranch
+force_1-2.gat	mapflag	noteleport
+force_1-2.gat	mapflag	noexp
+force_1-2.gat	mapflag	nodrop
+force_1-2.gat	mapflag	nochat
+force_1-2.gat	mapflag	novending
+force_1-2.gat	mapflag	nowarp
+force_1-2.gat	mapflag	nowarpto
+
+
+// ------------------------------------------------------------------------------ \\
+// EXIT WARPER - Saves Outside and Warps the Player to Prontera
+// ------------------------------------------------------------------------------ \\
+force_1-2.gat,174,185,6	script	Exit Warper	753,{
+mes "[Exit Warper]";
+mes "I will automatically undisguise your character and return you to your normal size.";
+next;
+mes "[Exit Warper]";
+mes "IMPORTANT: Players are ONLY allowed to disguise and change their character size here.  Any players found outside this area disguised as a monster will be banned without warning.";
+next;
+menu "Return to Normal and Leave",L_YES,"Cancel",L_NO;
+L_NO:
+close;
+L_YES:
+atcommand strcharinfo(0)+":@undisguise";
+atcommand strcharinfo(0)+ "@size 0";
+savepoint "prontera.gat",156,191;
+warp "prontera.gat",	156,	191;	end;
+close;
+}
+
+// ------------------------------------------------------------------------------ \\
+// SIZE CHANGER NPC - Saves in Disguise Room Once You Talk
+// Size Options: Giant, Normal, and Small - Same as the GM @size command
+// ------------------------------------------------------------------------------ \\
+force_1-2.gat,167,185,6	script	Size Changer	64,{
+savepoint "force_1-2.gat",162,177;
+mes "^ff0000[Size Changer]^000000";
+mes "Hello ^0000CD"+strcharinfo(0)+"^000000.";
+mes "I can change your size to giant or small or back to normal size.";
+next;
+menu "Cool, I want to try!",L_YES,"End Conversation",L_NO;
+L_YES:
+mes "^ff0000[Size Changer]^000000";
+mes "Ok, choose a size.";
+next;
+menu "Giant",L_Giant,"Small",L_Small,"Normal",L_Normal;
+L_Normal:
+atcommand strcharinfo(0)+ "@size 0";
+close;
+L_Small:
+atcommand strcharinfo(0)+ "@size 1";
+close;
+L_Giant:
+atcommand strcharinfo(0)+ "@size 2";
+close;
+L_NO:
+close;
+}
+
+// ------------------------------------------------------------------------------ \\
+// MONSTER DISGUISER NPC - Saves in Disguise Room Once You Talk 
+// Disguises players as monsters with the MobID's 1001-1816
+// "set @price,10000;" Costs players 10000 zeny to disguise
+// ------------------------------------------------------------------------------ \\
+force_1-2.gat,180,185,4	script	Disguise Master	909,{
+savepoint "force_1-2.gat",162,177;
+set @price,10000;
+mes "[Disguise Master]";
+mes "To disguise yourself as a monster it will cost you "+@price+"z.  Would you like to try?";
+next;
+menu "Disguise",LX,"Undisguise",L_undisguise;
+LX:
+if(Zeny<@price) goto L_Zeny;
+menu "Input Monster ID Number", L3;
+L_Zeny:
+mes "You don't have enough zeny.";
+close;
+L3:
+mes "[Disguise Master]";
+mes "Type in the Monster ID Number.";
+mes "(Example: 1002 is Poring)";
+mes "Type a Number Between 1001 and 1816.";
+input @costume;
+if (@costume >= 1001) && (@costume <= 1816) callfunc "change";
+goto L_error;
+L_undisguise:
+atcommand strcharinfo(0)+":@undisguise";
+close;
+L_error:
+mes "That doesn't seem to be right...  Please, try another Monster ID Number.";
+if(Zeny<@price) goto L_Zeny;
+next;
+menu "Input Monster ID Number", L3;
+close;
+}
+function script change {
+set Zeny,Zeny-@price;
+atcommand strcharinfo(0)+":@disguise "+@costume;
+close;
+}

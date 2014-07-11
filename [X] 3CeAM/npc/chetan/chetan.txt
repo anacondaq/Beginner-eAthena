@@ -1,0 +1,39 @@
+new_zone01.gat,57,112,5	script	ChetaN	733,{
+set @npcname$, "^FF0000[ChetaN]^000000";
+mes @npcname$;
+mes "Welcome to Beginner eAthena!";
+mes "Basically this is a starter kit for creating your very own Ragnarok Online private server.";
+next;
+menu "[Learn more]",-,"[End conversation]",L_cancel;
+mes @npcname$;
+mes "Beginner eAthena is a collection of nearly everything you need to know about starting up an RO server.";
+next;
+mes @npcname$;
+mes "This package download includes a variety of tools and files that will help you customized your server.";
+next;
+mes @npcname$;
+mes "The default settings you're using right now only allows YOU to play, you need a server host to connect more people.";
+next;
+mes @npcname$;
+mes "Just remember, ^FF0000I'M NOT eATHENA TECH SUPPORT!! I WILL NOT ANSWER YOUR QUESTIONS ON MAKING AN RO SERVER!!^000000";
+next;
+mes @npcname$;
+mes "If you have questions, go to the official eAthena message board at:";
+mes "^FF0000http://www.eathena.ws/^000000";
+next;
+mes @npcname$;
+mes "Type @commands to see all the GM commands, and type @help to see more details on nearly all GM commands.";
+next;
+mes @npcname$;
+mes "Go to eAthena\npc\chetan\chetan.txt to remove or disable this NPC.";
+next;
+mes @npcname$;
+mes "Thanks for taking the time to actually read all this, now go have some fun!";
+next;
+mes @npcname$;
+mes "And Great Thanks To Zairik";
+close;
+
+L_cancel:
+close;
+}

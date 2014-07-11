@@ -1,0 +1,13 @@
+Installing instructions
+
+Step one:    Copy files from “ro-cursors.zip” into a folder where you wish to keep them (i.e. My Documents)
+Step two:    Open Control Panels
+Step three:  Open ‘Mouse’
+Step four:   Click on the ‘Pointers’ tab
+Step five:    Click on the pointer you wish to change, and click ‘Browse…’
+Step six:      Locate the file with the appropriate name in the folder where you extracted “ro-cursors.zip”
+-Repeat Steps 5 and 6 for the rest of the pointers your wish to change.
+
+NOTE: If you want the entire set to work, you MUST do them all one, by one.
+
+Enjoy - http://www.ro.pak0.com -

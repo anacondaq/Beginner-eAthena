@@ -1,0 +1,67 @@
+
+11-11-2005 00:52:44: The char-server starting...
+11-11-2005 00:52:44: mmo_char_init: No character found in save/athena.txt.
+11-11-2005 00:52:44: Id for the next created character: 150000.
+11-11-2005 00:52:44: The char-server is ready (Server is listening on the port 6121).
+11-11-2005 00:53:10: Map-Server 0 connected: 737 maps, from IP 5.81.68.154 port 5121. Map-server 0 loading complete.
+11-11-2005 00:53:38: make new char: account: 2000002, slot 0, name: Admin, stats: 9/9/1/1/9/1, hair: 2, hair color: 0.
+11-11-2005 00:53:59: make new char: account: 2000003, slot 0, name: Player, stats: 9/9/1/1/9/1, hair: 2, hair color: 0.
+
+11-11-2005 00:54:45: The char-server starting...
+11-11-2005 00:54:45: mmo_char_init: 2 characters read in save/athena.txt.
+11-11-2005 00:54:45: Id for the next created character: 150002.
+11-11-2005 00:54:46: The char-server is ready (Server is listening on the port 6121).
+11-11-2005 00:55:13: Map-Server 0 connected: 737 maps, from IP 5.81.68.154 port 5121. Map-server 0 loading complete.
+
+11-11-2005 00:56:44: The char-server starting...
+11-11-2005 00:56:44: mmo_char_init: 2 characters read in save/athena.txt.
+11-11-2005 00:56:44: Id for the next created character: 150002.
+11-11-2005 00:56:45: The char-server is ready (Server is listening on the port 6121).
+11-11-2005 00:57:11: Map-Server 0 connected: 737 maps, from IP 5.81.68.154 port 5121. Map-server 0 loading complete.
+11-11-2005 00:57:19: Character Selected, Account ID: 2000002, Character Slot: 0, Character Name: Admin.
+
+11-11-2005 01:01:22: The char-server starting...
+11-11-2005 01:01:22: mmo_char_init: 2 characters read in save/athena.txt.
+11-11-2005 01:01:22: Id for the next created character: 150002.
+11-11-2005 01:01:22: The char-server is ready (Server is listening on the port 6121).
+11-11-2005 01:01:49: Map-Server 0 connected: 737 maps, from IP 5.81.68.154 port 5121. Map-server 0 loading complete.
+11-11-2005 01:02:05: Character Selected, Account ID: 2000002, Character Slot: 0, Character Name: Admin.
+
+11-11-2005 00:18:05: The char-server starting...
+11-11-2005 00:18:05: mmo_char_init: 2 characters read in save/athena.txt.
+11-11-2005 00:18:05: Id for the next created character: 150002.
+11-11-2005 00:18:05: The char-server is ready (Server is listening on the port 6121).
+11-11-2005 00:18:46: Map-Server 0 connected: 737 maps, from IP 5.81.68.154 port 5121. Map-server 0 loading complete.
+11-11-2005 00:19:44: Character Selected, Account ID: 2000002, Character Slot: 0, Character Name: Admin.
+
+11-11-2005 00:38:46: The char-server starting...
+11-11-2005 00:38:46: mmo_char_init: 2 characters read in save/athena.txt.
+11-11-2005 00:38:46: Id for the next created character: 150002.
+11-11-2005 00:38:46: The char-server is ready (Server is listening on the port 6121).
+11-11-2005 00:39:17: Map-Server 0 connected: 737 maps, from IP 5.81.68.154 port 5121. Map-server 0 loading complete.
+
+11-11-2005 00:40:11: The char-server starting...
+11-11-2005 00:40:12: mmo_char_init: 2 characters read in save/athena.txt.
+11-11-2005 00:40:12: Id for the next created character: 150002.
+11-11-2005 00:40:12: The char-server is ready (Server is listening on the port 6121).
+11-11-2005 00:40:33: Map-Server 0 connected: 737 maps, from IP 5.81.68.154 port 5121. Map-server 0 loading complete.
+
+11-11-2005 00:41:17: The char-server starting...
+11-11-2005 00:41:17: mmo_char_init: 2 characters read in save/athena.txt.
+11-11-2005 00:41:18: Id for the next created character: 150002.
+11-11-2005 00:41:18: The char-server is ready (Server is listening on the port 6121).
+11-11-2005 00:41:39: Map-Server 0 connected: 737 maps, from IP 5.81.68.154 port 5121. Map-server 0 loading complete.
+
+11-08-2010 13:32:06: The char-server starting...
+11-08-2010 13:32:06: mmo_char_init: 2 characters read in save/athena.txt.
+11-08-2010 13:32:06: Id for the next created character: 150002.
+11-08-2010 13:32:06: The char-server is ready (Server is listening on the port 6121).
+11-08-2010 13:32:52: Map-Server 0 connected: 737 maps, from IP 180.214.132.214 port 5121. Map-server 0 loading complete.
+11-08-2010 13:34:58: Character Selected, Account ID: 2000002, Character Slot: 0, Character Name: Admin.
+
+11-08-2010 14:35:27: The char-server starting...
+11-08-2010 14:35:27: mmo_char_init: 2 characters read in save/athena.txt.
+11-08-2010 14:35:27: Id for the next created character: 150002.
+11-08-2010 14:35:27: The char-server is ready (Server is listening on the port 6121).
+11-08-2010 14:36:27: Map-Server 0 connected: 737 maps, from IP 5.81.68.154 port 5121. Map-server 0 loading complete.
+11-08-2010 14:36:41: Character Selected, Account ID: 2000002, Character Slot: 0, Character Name: Admin.

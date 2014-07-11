@@ -1,0 +1,272 @@
+// ------------------------------------------------------------------------------ \\
+// ------------------------------www.aura-se.co.cc------------------------------- \\
+// ------------------------------------------------------------------------------ \\
+// -----------------------+-+-+-+-+-+-+-+-+ +-+-+-+-+-+-+-+---------------------- \\
+// -----------------------|B|e|g|i|n|n|e|r| |e|A|t|h|e|n|a|---------------------- \\
+// -----------------------+-+-+-+-+-+-+-+-+ +-+-+-+-+-+-+-+---------------------- \\
+// ------------------------------------------------------------------------------ \\
+//             INSTRUCTIONS - GUIDE - How TO USE - F.A.Q - INFORMATION            \\
+// ------------------------------------------------------------------------------ \\
+// ------------------------------------------------------------------------------ \\
+// Folders that start with "[X]" shouldn't be included in a public release files  \\
+// ------------------------------------------------------------------------------ \\
+// Look in "[X] Resources" for more tools and files for server customization      \\
+// ------------------------------------------------------------------------------ \\
+// REQUIREMENTS:                                                                  \\
+// This will require a minimum of 512MB of RAM                                    \\
+// Suggested Windows XP Operating System                                          \\
+// Low expectations - This is not a super server setup, it's for beginner testing \\
+//                                                                                \\
+// ------------------------------------------------------------------------------ \\
+// STEP 1: Put these files into your RO folder. "C:\Program Files\Ragray\RO"      \\
+//                                                                                \\
+// If you have a firewall you should either disable it (not the best option) [OR] \\
+//                                                                                \\
+// Allow the three ports used to run the server (5121,6121,6900)                  \\
+//                                                                                \\
+//    ~ IT IS RECOMMEND YOU USE THE ALLOW PORTS METHOD FOR SECURITY REASONS ~     \\
+//                                                                                \\
+// ------------------------------------------------------------------------------ \\
+// STEP 2: Click the "START SERVER" icon (inside eAthena folder) to start.        \\
+//                                                                                \\
+// Three windows will pop-up for map, login, and char servers.                    \\
+//                                                                                \\
+// Allow it to automatically start up. It'll finish when mapserver.bat says:      \\
+//                                                                                \\
+// "[Info]: Recieved Fame List of '0' characters." and stops loading anything.    \\
+//                                                                                \\
+// The server is ready at this point for you to login.                            \\
+//                                                                                \\
+// ------------------------------------------------------------------------------ \\
+// STEP 3: Start the RO playable client icon (it has the Ragnarok Online icon)    \\
+//                                                                                \\
+// THE TWO PRE-MADE ACCOUNTS ARE:                                                 \\
+//                                                                                \\
+// Username: "Admin"                                                              \\
+// Password: "password"                                                           \\
+//                                                                                \\
+// AND                                                                            \\
+//                                                                                \\
+// Username: "Player"                                                             \\
+// Password: "password"                                                           \\
+//                                                                                \\                                                     
+// "Admin" account is GM level 99 (highest), and "Player" account just regular.   \\
+//                                                                                \\
+// From here you can play around, use GM commands, play normally, whatever.       \\
+//                                                                                \\
+// It's your server now.                                                          \\
+//                                                                                \\
+// ------------------------------------------------------------------------------ \\
+// ------------------------------------------------------------------------------ \\
+// ------------------------------------------------------------------------------ \\
+//                                                                                \\
+// ATTENTION - PLEASE NOTE:                                                       \\
+//                                                                                \\
+// All resources used belong to their respective owners                           \\
+// I only created a few minor things in this resource kit, most of it is not mine \\
+//                                                                                \\
+// I did not create eAthena,                                                      \\
+// I only setup a quick and simple RO server for people who are new to eAthena.   \\
+//                                                                                \\
+// This basically includes all you would need to start an RO server.              \\
+// I suggest you take time to learn how to use eAthena effectively first.         \\
+// Just please, for the love of God and all that is good, learn to use a GRF tool \\
+// and DON'T just hand out the data folder. That's all I ask.                     \\
+//                                                                                \\
+// I hope you actually learn something from this experience rather than just copy \\
+// and distribute this whole package as if it were a finished public server.      \\
+//                                                                                \\
+// ------------------------------------------------------------------------------ \\
+//                                                                                \\
+// QUESTIONS? NEED HELP?                                                          \\
+//     ____   ___    __  ___   _   ______  ______                                 \\
+//    /  _/  /   |  /  |/  /  / | / / __ \/_  __/                                 \\
+//    / /   / /| | / /|_/ /  /  |/ / / / / / /                                    \\
+//  _/ /   / ___ |/ /  / /  / /|  / /_/ / / /                                     \\
+// /___/  /_/  |_/_/  /_/  /_/ |_/\____/ /_/                                      \\
+//                                                                                \\
+//         ___   __  __                        ____________________  __           \\
+//   ___  /   | / /_/ /_  ___  ____  ____ _   /_  __/ ____/ ____/ / / /           \\
+//  / _ \/ /| |/ __/ __ \/ _ \/ __ \/ __ `/    / / / __/ / /   / /_/ /            \\
+// /  __/ ___ / /_/ / / /  __/ / / / /_/ /    / / / /___/ /___/ __  /             \\
+// \___/_/  |_\__/_/ /_/\___/_/ /_/\__,_/    /_/ /_____/\____/_/ /_/              \\
+//                                                                                \\
+//    _____ __  ______  ____  ____  ____  ______                                  \\
+//   / ___// / / / __ \/ __ \/ __ \/ __ \/_  __/                                  \\
+//   \__ \/ / / / /_/ / /_/ / / / / /_/ / / /                                     \\
+//  ___/ / /_/ / ____/ ____/ /_/ / _, _/ / /        >_<                           \\
+// /____/\____/_/   /_/    \____/_/ |_| /_/                                       \\
+//                                                                                \\
+//                                                                                \\
+// I suggest you go to: http://eathena.ws/                                        \\
+//                                                                                \\
+// There you can ask all the *cough noob cough* questions you want,               \\
+// but please use the search bar FIRST!!  SEARCH FIRST!!!                         \\
+//                                                                                \\
+// Most of your questions have probably been answered already                     \\
+// so search before you post!   I CAN'T STRESS THIS ENOUGH!!                      \\
+//                                                                                \\
+// ------------------------------------------------------------------------------ \\
+// ------------------------------------------------------------------------------ \\
+// ------------------------------------------------------------------------------ \\
+//                                                                                \\
+//                                                                                \\
+//                                                                                \\
+//                                                                                \\
+//                                                                                \\
+//                                                                                \\
+//                                                                                \\
+// ------------------------------------------------------------------------------ \\
+// ------------------------------------------------------------------------------ \\
+// ------------------------------------------------------------------------------ \\
+//                                                                                \\
+// FAQ - Frequently Asked Questions                                               \\
+//                                                                                \\
+// ------------------------------------------------------------------------------ \\
+// ------------------------------------------------------------------------------ \\
+// ------------------------------------------------------------------------------ \\
+//                                                                                \\
+// ------------------------------------------------------------------------------ \\
+//                                                                                \\
+// Common Questions - Where do I add/edit/change...?                              \\
+//                                                                                \\
+// ------------------------------------------------------------------------------ \\
+//                                                                                \\
+// ------------------------------------------------------------------------------ \\
+// ============ Items  ============ \\                                            \\
+// ------------------------------------------------------------------------------ \\
+//                                                                                \\
+// eAthena\db\item_db                                                             \\
+// eAthena\db\item_avail                                                          \\
+//                                                                                \\
+// Unless using item_avail, you need client-side files:                           \\
+//                                                                                \\
+// data\num2itemdisplaynametable.txt                                              \\
+// data\num2itemdesctable.txt                                                     \\
+// data\num2itemresnametable.txt                                                  \\
+// data\idnum2itemdisplaynametable.txt                                            \\
+// data\idnum2itemdesctable.txt                                                   \\
+// data\idnum2itemresnametable.txt                                                \\
+//                                                                                \\
+// Extract these from rdata.grf using a GRF tool.                                 \\
+//                                                                                \\
+// ------------------------------------------------------------------------------ \\
+// =========== Monsters =========== \\                                            \\
+// ------------------------------------------------------------------------------ \\
+//                                                                                \\
+// eAthena\db\mob_db.txt                                                          \\
+// eAthena\db\mob_avail                                                           \\
+//                                                                                \\
+// Use mob_avail to create a new monster                                          \\
+// with the same sprite as an existing monster.                                   \\
+//                                                                                \\
+// Skill Delay/Cooldown:                                                          \\
+// eAthena\db\skill_cast_db                                                       \\
+// eAthena\db\skill_castnodex_db                                                  \\
+//                                                                                \\
+// Pets:                                                                          \\
+// eAthena\db\pet_db                                                              \\
+//                                                                                \\
+// ------------------------------------------------------------------------------ \\
+// ============== NPC's ============ \\                                           \\
+// ------------------------------------------------------------------------------ \\
+//                                                                                \\
+// Where do I enable pre-made custom NPC's?                                       \\
+// eAthena\npc\scripts_custom                                                     \\
+// (Take off the "//" comment lines to enable)                                    \\
+//                                                                                \\
+// Where do I enable @commands for normal players?                                \\
+// eAthena\conf\atcommand_athena                                                  \\
+// (Normal players are GM level zero)                                             \\
+//                                                                                \\
+// ------------------------------------------------------------------------------ \\
+// ========= CUSTOM HEADGEAR ======== \\                                          \\
+// ------------------------------------------------------------------------------ \\
+//                                                                                \\
+// There are two methods of adding headgear.                                      \\
+// You can either replace existing headgear sprites or by editing Lua Files [RE]. \\
+// I will only cover replacing existing headgear.                                 \\
+// New headgear requires .spr and .act files.                                     \\
+//                                                                                \\
+// ------------------------------------------------------------------------------ \\
+//                                                                                \\
+// All headgear sprites are assigned a ViewID                                     \\
+// If you're replacing existing headgear                                          \\
+// you should find the resource name for it here:                                 \\
+// http://ratemyserver.net/index.php?page=riot_bible_section&section=4            \\
+//                                                                                \\
+// The resource names look like gibberish ASCII.                                  \\
+//                                                                                \\
+// ------------------------------------------------------------------------------ \\
+//                                                                                \\
+// Sprites and ACT files are placed in the folders below.                         \\
+// YES YOU HAVE TO PUT THE SPR. AND .ACT FILES IN ALL THE FOLLOWING FOLDERS.      \\
+//                                                                                \\
+// ------------------------------------------------------------------------------ \\
+//                                                                                \\
+// data\sprite\악세사리\여\   (directory, sprite display for females)             \\
+// Both .spr and .act files have to be placed here and named correctly.           \\
+// This "여_" has to be at the beginning of the file names.                       \\
+//                                                                                \\
+// Yes "여" is a folder name.                                                     \\
+//                                                                                \\
+// ((EXAMPLE))                                                                    \\
+// 여_정지표지판.spr (file name)                                                  \\
+// 여_정지표지판.act (file name)                                                  \\
+//                                                                                \\
+// ------------------------------------------------------------------------------ \\
+//                                                                                \\
+// data\sprite\악세사리\남\   (directory, sprite display for males)               \\
+// Both .spr and .act files have to be placed here and named correctly.           \\
+// This "남_" has to be at the beginning of the file names.                       \\
+//                                                                                \\
+// Yes "남" is a folder name.                                                     \\
+//                                                                                \\
+// ((EXAMPLE))                                                                    \\
+// 남_턱수염.spr (file name)                                                      \\
+// 남_턱수염.act (file name)                                                      \\
+//                                                                                \\
+// ------------------------------------------------------------------------------ \\
+//                                                                                \\
+// data\sprite\아AIAU\  (directory, drop displayed when dragging an item)         \\
+// Both .spr and .act files have to be placed here and named correctly.           \\
+//                                                                                \\
+// ------------------------------------------------------------------------------ \\
+//                                                                                \\
+// Then you need to put images in "\data\texture\유저인터페이스\"                 \\
+//  under "collection" and "item" folders for how it will look in your inventory  \\
+//  and how it will look when you right click for the description.                \\
+//                                                                                \\
+// The new custom headgear will also require you add them:                        \\
+// data\num2itemdisplaynametable.txt                                              \\
+// data\num2itemdesctable.txt                                                     \\
+// data\num2itemresnametable.txt (used for item and collection images)            \\
+// data\idnum2itemdisplaynametable.txt                                            \\
+// data\idnum2itemdesctable.txt                                                   \\
+// data\idnum2itemresnametable.txt (used for item and collection images)          \\
+//                                                                                \\
+// Make sure all the numbers match up.                                            \\
+//                                                                                \\
+// Added Latest Ragray Headgear Collection  And Some Custom Item Collection       \\
+//                                                                                \\
+// ------------------------------------------------------------------------------ \\
+// ------------------------------------------------------------------------------ \\
+// ------------------------------------------------------------------------------ \\
+//                                                                                \\
+// _ ChetaN/Aura (www.aura-se.co.cc)                                              \\
+//                                                                                \\
+// Special Thanks to 1st B.eAthena Creater                                        \\
+//                                                                                \\
+// - Zairik (ScytheRO Administrator)                                              \\
+// http://www.scythero.com/                                                       \\
+// http://www.zairik.com/                                                         \\
+//                                                                                \\
+// ------------------------------------------------------------------------------ \\
+// ------------------------------------------------------------------------------ \\
+// ------------------------------------------------------------------------------ \\
+//                                                                                \\
+//                                                                                \\
+//                                                                                \\
+//                                                                                \\
+//                                                                                \\
+// ------------------------------------------------------------------------------ \\

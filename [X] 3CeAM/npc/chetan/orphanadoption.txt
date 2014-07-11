@@ -1,0 +1,42 @@
+// ------------------------------------------------------------------------------ \\
+//        +MMMMMMMMMM$                                                            \\
+//       MMMMMMMMMM$                                                              \\
+//     ,MM,    ,MM7                                                               \\
+//              MM                                                                \\
+//             MM        MMMMMMMMM   MMM     $MMMMMMMM     MMM   MMMZ   MMM7      \\
+//            MM        MMMI   MMM   MMM   MMMM      MM    MMM   MMM    ZM        \\
+//           MM,       7MM,    MMM   MMM   MMM      ZMMM   MMM   MMM   ZZ         \\
+//          MM        7MM, MMMMMMM   MMM   MMM  , MM       MMM   MMM =M~,         \\
+//         $M         MM7      MMM   MMM   MMM  NMMMM      MMM   MMMMMMMMN=       \\
+//        ,N          MM       MMM   MMM   MMM     MNMM    MMM   MMM    ,MMM      \\
+//        MO          MM       MMM   MMM   MMM      ,MM+   MMM   MMM      MMM     \\
+//       MM           MM       MMM   MMM   MMM        MM   MMM   MMM       MM~    \\
+//      :M         ,  MM       MMM   MMM   MMM        ~M   MMM   MMM        MM    \\
+//      MM         I  MM       MMM   MMM   MMM         M   MMM   MMM        M+    \\
+//     7MMMMMMMMMMMI   M       MMM   MMM   MMM        7M   MMM   MMM        M     \\
+//     NMMMMMMMMMMM     M      MMM   MMM   MMM       ,M    MMM   MMM       M      \\
+// ------------------------------------------------------------------------------ \\
+prt_church.gat,177,176,4	script	Orphan Adoption Woman	863,{
+set @npcname$, "[Orphan Adoption]";
+if ( BaseJob != Job_Novice || JobLevel > 1 || BaseLevel > 1) goto TooOld;
+mes @npcname$;
+mes "Aww, do you need a family?";
+next;
+menu "I can do fine on my own!",-,"Yes! *sob*",Yes;
+close;
+Yes:
+if(!countitem(714)) goto NoItem;
+delitem 714,1;
+jobchange 4023;
+mes "[You Have Been Adopted!]";
+close;
+NoItem:
+mes @npcname$;
+mes "Aww, sorry. You don't have an Emperium. If you could bring us own, we could adopt you right away!";
+close;
+TooOld:
+mes @npcname$;
+mes "It seems you're too old now to need a mother and father to look after you.";
+close;
+}
+prt_church.gat,178,175,4	duplicate(Orphan Adoption Woman)	Orphan Adoption Man	866

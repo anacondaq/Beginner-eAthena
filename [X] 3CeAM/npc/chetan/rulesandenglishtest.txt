@@ -1,0 +1,467 @@
+// ------------------------------------------------------------------------------ \\
+//        +MMMMMMMMMM$                                                            \\
+//       MMMMMMMMMM$                                                              \\
+//     ,MM,    ,MM7                                                               \\
+//              MM                                                                \\
+//             MM        MMMMMMMMM   MMM     $MMMMMMMM     MMM   MMMZ   MMM7      \\
+//            MM        MMMI   MMM   MMM   MMMM      MM    MMM   MMM    ZM        \\
+//           MM,       7MM,    MMM   MMM   MMM      ZMMM   MMM   MMM   ZZ         \\
+//          MM        7MM, MMMMMMM   MMM   MMM  , MM       MMM   MMM =M~,         \\
+//         $M         MM7      MMM   MMM   MMM  NMMMM      MMM   MMMMMMMMN=       \\
+//        ,N          MM       MMM   MMM   MMM     MNMM    MMM   MMM    ,MMM      \\
+//        MO          MM       MMM   MMM   MMM      ,MM+   MMM   MMM      MMM     \\
+//       MM           MM       MMM   MMM   MMM        MM   MMM   MMM       MM~    \\
+//      :M         ,  MM       MMM   MMM   MMM        ~M   MMM   MMM        MM    \\
+//      MM         I  MM       MMM   MMM   MMM         M   MMM   MMM        M+    \\
+//     7MMMMMMMMMMMI   M       MMM   MMM   MMM        7M   MMM   MMM        M     \\
+//     NMMMMMMMMMMM     M      MMM   MMM   MMM       ,M    MMM   MMM       M      \\
+// ------------------------------------------------------------------------------ \\
+force_3-2.gat	mapflag	nobranch
+force_3-2.gat	mapflag	nomemo
+force_3-2.gat	mapflag	sakura
+force_3-2.gat	mapflag	nochat
+force_3-2.gat	mapflag	novending
+force_3-2.gat	mapflag	nowarp
+force_3-2.gat	mapflag	nowarpto
+force_3-2.gat	mapflag	noteleport
+force_3-2.gat	mapflag	noskill
+// ----------------------------------------
+force_3-2.gat,174,38,5	script	Starter Test	989,{
+// ----------------------------------------
+savepoint "force_3-2.gat",174,30;
+set @answer, 0;
+set @questionnum, rand (0,9);
+set @checknum0, rand (0,9);
+set @checknum1, rand (0,9);
+set @checknum2, rand (0,9);
+set @checknum3, rand (0,9);
+set @checknum4, rand (0,9);
+set @checknum5, rand (0,9);
+set @checknum6, rand (0,9);
+set @checknum7, rand (0,9);
+set @checknum8, rand (0,9);
+set @checknum9, rand (0,9);
+// ----------------------------------------
+set @npcname$, "[Starter Test]";
+mes @npcname$;
+mes "Before you can get started, you need to pass a simple test.  I also need to explain the server rules so read carefully!";
+next;
+mes @npcname$;
+mes "No impersonating Game Masters or Staff or other players";
+next;
+mes @npcname$;
+mes "No inappropriate character or guild names such as racial or foul language names, ascii coded names, or ilili-like names";
+next;
+mes @npcname$;
+mes "No chat spamming (SPAM: Stupid Pointless Annoying Messages, or repeatative messages)";
+next;
+mes @npcname$;
+mes "No skill spamming or excessive use of skills in a main area";
+next;
+mes @npcname$;
+mes "No advertising websites or other servers";
+next;
+mes @npcname$;
+mes "No kill stealing (aka KSing, does not include Mvp's unless summoned)";
+next;
+mes @npcname$;
+mes "No looting items dropped by monsters other people have killed without permission";
+next;
+mes @npcname$;
+mes "No profanity, flaming, racial, or offensive language whatsoever";
+next;
+mes @npcname$;
+mes "No harassment of players, Game Masters, or Staff";
+next;
+mes @npcname$;
+mes "No holding up events or ignoring instructions given by a Game Master in an event";
+next;
+mes @npcname$;
+mes "No sexual harassment, sexual jokes, or any talk of adult subject matter";
+next;
+mes @npcname$;
+mes "No botting or any other third party software, regardless of whether it gives an advantage";
+next;
+mes @npcname$;
+mes "No scamming or attempting to scam players";
+next;
+mes @npcname$;
+mes "No begging (asking for items or zeny) players, Game Masters, or Staff";
+next;
+mes @npcname$;
+mes "No slander or rumors against Game Masters or Staff";
+next;
+mes @npcname$;
+mes "No sharing accounts or passwords for any reason (not even with a Game Master)";
+next;
+mes @npcname$;
+mes "Do not abuse the @request command (only for reporting broken rules)";
+next;
+mes @npcname$;
+mes "Use GL instead of GM for guild position titles";
+next;
+mes @npcname$;
+mes "Be respectful to other players and GM's";
+next;
+mes @npcname$;
+mes "Please Note:";
+mes "The rules include, but are NOT limited to this list. If you break a rule you could be muted, jailed, or banned depending on the situation. We reserve the right to wipe your account and/or character in the case that you exploit any possible bug or for any reason deemed serious enough. Use common sense!";
+next;
+mes @npcname$;
+mes "Server Password Policy:";
+mes "Each individual player is responsible for his or her own passwords and accounts. We do not reset, change, or give out forgotten passwords for any reason whatsoever. Either figure out your own password or make a new account.";
+next;
+mes @npcname$;
+mes "Do not ask GM's to recover your account. There is no way to confirm the person who originally created the account is the same person requesting a password recovery.";
+next;
+mes @npcname$;
+mes "Ok, now that I have explained the rules, here is your first test question...";
+next;
+mes @npcname$;
+// ----------------------------------------
+if (@questionnum == 0) goto myquestion0;
+if (@questionnum == 1) goto myquestion1;
+if (@questionnum == 2) goto myquestion2;
+if (@questionnum == 3) goto myquestion3;
+if (@questionnum == 4) goto myquestion4;
+if (@questionnum == 5) goto myquestion5;
+if (@questionnum == 6) goto myquestion6;
+if (@questionnum == 7) goto myquestion7;
+if (@questionnum == 8) goto myquestion8;
+if (@questionnum == 9) goto myquestion9;
+// ----------------------------------------
+myquestion0:
+set @answer,@checknum0;
+mes "What Is The First Number?";
+mes "^C0C0C01st: ^000000^0000FF"+ @checknum0 + "^000000";
+mes "^C0C0C02nd: ^000000^0000FF"+ @checknum1 + "^000000";
+mes "^C0C0C03rd: ^000000^0000FF"+ @checknum2 + "^000000";
+mes "^C0C0C04th: ^000000^0000FF"+ @checknum3 + "^000000";
+mes "^C0C0C05th: ^000000^0000FF"+ @checknum4 + "^000000";
+mes "^C0C0C06th: ^000000^0000FF"+ @checknum5 + "^000000";
+mes "^C0C0C07th: ^000000^0000FF"+ @checknum6 + "^000000";
+mes "^C0C0C08th: ^000000^0000FF"+ @checknum7 + "^000000";
+mes "^C0C0C09th: ^000000^0000FF"+ @checknum8 + "^000000";
+mes "^C0C0C010th: ^000000^0000FF"+ @checknum9 + "^000000";
+input @myinput;
+if (@myinput == @checknum0) goto L_Complete;
+if (@questionnum != 99) goto CONTINUED;
+myquestion1:
+set @answer,@checknum1;
+mes "What Is The Second Number?";
+mes "^C0C0C01st: ^000000^0000FF"+ @checknum0 + "^000000";
+mes "^C0C0C02nd: ^000000^0000FF"+ @checknum1 + "^000000";
+mes "^C0C0C03rd: ^000000^0000FF"+ @checknum2 + "^000000";
+mes "^C0C0C04th: ^000000^0000FF"+ @checknum3 + "^000000";
+mes "^C0C0C05th: ^000000^0000FF"+ @checknum4 + "^000000";
+mes "^C0C0C06th: ^000000^0000FF"+ @checknum5 + "^000000";
+mes "^C0C0C07th: ^000000^0000FF"+ @checknum6 + "^000000";
+mes "^C0C0C08th: ^000000^0000FF"+ @checknum7 + "^000000";
+mes "^C0C0C09th: ^000000^0000FF"+ @checknum8 + "^000000";
+mes "^C0C0C010th: ^000000^0000FF"+ @checknum9 + "^000000";
+input @myinput;
+if (@myinput == @checknum1) goto L_Complete;
+if (@questionnum != 99) goto CONTINUED;
+myquestion2:
+set @answer,@checknum2;
+mes "What Is The Third Number?";
+mes "^C0C0C01st: ^000000^0000FF"+ @checknum0 + "^000000";
+mes "^C0C0C02nd: ^000000^0000FF"+ @checknum1 + "^000000";
+mes "^C0C0C03rd: ^000000^0000FF"+ @checknum2 + "^000000";
+mes "^C0C0C04th: ^000000^0000FF"+ @checknum3 + "^000000";
+mes "^C0C0C05th: ^000000^0000FF"+ @checknum4 + "^000000";
+mes "^C0C0C06th: ^000000^0000FF"+ @checknum5 + "^000000";
+mes "^C0C0C07th: ^000000^0000FF"+ @checknum6 + "^000000";
+mes "^C0C0C08th: ^000000^0000FF"+ @checknum7 + "^000000";
+mes "^C0C0C09th: ^000000^0000FF"+ @checknum8 + "^000000";
+mes "^C0C0C010th: ^000000^0000FF"+ @checknum9 + "^000000";
+input @myinput;
+if (@myinput == @checknum2) goto L_Complete;
+if (@questionnum != 99) goto CONTINUED;
+myquestion3:
+set @answer,@checknum3;
+mes "What Is The Fourth Number?";
+mes "^C0C0C01st: ^000000^0000FF"+ @checknum0 + "^000000";
+mes "^C0C0C02nd: ^000000^0000FF"+ @checknum1 + "^000000";
+mes "^C0C0C03rd: ^000000^0000FF"+ @checknum2 + "^000000";
+mes "^C0C0C04th: ^000000^0000FF"+ @checknum3 + "^000000";
+mes "^C0C0C05th: ^000000^0000FF"+ @checknum4 + "^000000";
+mes "^C0C0C06th: ^000000^0000FF"+ @checknum5 + "^000000";
+mes "^C0C0C07th: ^000000^0000FF"+ @checknum6 + "^000000";
+mes "^C0C0C08th: ^000000^0000FF"+ @checknum7 + "^000000";
+mes "^C0C0C09th: ^000000^0000FF"+ @checknum8 + "^000000";
+mes "^C0C0C010th: ^000000^0000FF"+ @checknum9 + "^000000";
+input @myinput;
+if (@myinput == @checknum3) goto L_Complete;
+if (@questionnum != 99) goto CONTINUED;
+myquestion4:
+set @answer,@checknum4;
+mes "What Is The Fifth Number?";
+mes "^C0C0C01st: ^000000^0000FF"+ @checknum0 + "^000000";
+mes "^C0C0C02nd: ^000000^0000FF"+ @checknum1 + "^000000";
+mes "^C0C0C03rd: ^000000^0000FF"+ @checknum2 + "^000000";
+mes "^C0C0C04th: ^000000^0000FF"+ @checknum3 + "^000000";
+mes "^C0C0C05th: ^000000^0000FF"+ @checknum4 + "^000000";
+mes "^C0C0C06th: ^000000^0000FF"+ @checknum5 + "^000000";
+mes "^C0C0C07th: ^000000^0000FF"+ @checknum6 + "^000000";
+mes "^C0C0C08th: ^000000^0000FF"+ @checknum7 + "^000000";
+mes "^C0C0C09th: ^000000^0000FF"+ @checknum8 + "^000000";
+mes "^C0C0C010th: ^000000^0000FF"+ @checknum9 + "^000000";
+input @myinput;
+if (@myinput == @checknum4) goto L_Complete;
+if (@questionnum != 99) goto CONTINUED;
+myquestion5:
+set @answer,@checknum5;
+mes "What Is The Sixth Number?";
+mes "^C0C0C01st: ^000000^0000FF"+ @checknum0 + "^000000";
+mes "^C0C0C02nd: ^000000^0000FF"+ @checknum1 + "^000000";
+mes "^C0C0C03rd: ^000000^0000FF"+ @checknum2 + "^000000";
+mes "^C0C0C04th: ^000000^0000FF"+ @checknum3 + "^000000";
+mes "^C0C0C05th: ^000000^0000FF"+ @checknum4 + "^000000";
+mes "^C0C0C06th: ^000000^0000FF"+ @checknum5 + "^000000";
+mes "^C0C0C07th: ^000000^0000FF"+ @checknum6 + "^000000";
+mes "^C0C0C08th: ^000000^0000FF"+ @checknum7 + "^000000";
+mes "^C0C0C09th: ^000000^0000FF"+ @checknum8 + "^000000";
+mes "^C0C0C010th: ^000000^0000FF"+ @checknum9 + "^000000";
+input @myinput;
+if (@myinput == @checknum5) goto L_Complete;
+if (@questionnum != 99) goto CONTINUED;
+myquestion6:
+set @answer,@checknum6;
+mes "What Is The Seventh Number?";
+mes "^C0C0C01st: ^000000^0000FF"+ @checknum0 + "^000000";
+mes "^C0C0C02nd: ^000000^0000FF"+ @checknum1 + "^000000";
+mes "^C0C0C03rd: ^000000^0000FF"+ @checknum2 + "^000000";
+mes "^C0C0C04th: ^000000^0000FF"+ @checknum3 + "^000000";
+mes "^C0C0C05th: ^000000^0000FF"+ @checknum4 + "^000000";
+mes "^C0C0C06th: ^000000^0000FF"+ @checknum5 + "^000000";
+mes "^C0C0C07th: ^000000^0000FF"+ @checknum6 + "^000000";
+mes "^C0C0C08th: ^000000^0000FF"+ @checknum7 + "^000000";
+mes "^C0C0C09th: ^000000^0000FF"+ @checknum8 + "^000000";
+mes "^C0C0C010th: ^000000^0000FF"+ @checknum9 + "^000000";
+input @myinput;
+if (@myinput == @checknum6) goto L_Complete;
+if (@questionnum != 99) goto CONTINUED;
+myquestion7:
+set @answer,@checknum7;
+mes "What Is The Eighth Number?";
+mes "^C0C0C01st: ^000000^0000FF"+ @checknum0 + "^000000";
+mes "^C0C0C02nd: ^000000^0000FF"+ @checknum1 + "^000000";
+mes "^C0C0C03rd: ^000000^0000FF"+ @checknum2 + "^000000";
+mes "^C0C0C04th: ^000000^0000FF"+ @checknum3 + "^000000";
+mes "^C0C0C05th: ^000000^0000FF"+ @checknum4 + "^000000";
+mes "^C0C0C06th: ^000000^0000FF"+ @checknum5 + "^000000";
+mes "^C0C0C07th: ^000000^0000FF"+ @checknum6 + "^000000";
+mes "^C0C0C08th: ^000000^0000FF"+ @checknum7 + "^000000";
+mes "^C0C0C09th: ^000000^0000FF"+ @checknum8 + "^000000";
+mes "^C0C0C010th: ^000000^0000FF"+ @checknum9 + "^000000";
+input @myinput;
+if (@myinput == @checknum7) goto L_Complete;
+if (@questionnum != 99) goto CONTINUED;
+myquestion8:
+set @answer,@checknum8;
+mes "What Is The Ninth Number?";
+mes "^C0C0C01st: ^000000^0000FF"+ @checknum0 + "^000000";
+mes "^C0C0C02nd: ^000000^0000FF"+ @checknum1 + "^000000";
+mes "^C0C0C03rd: ^000000^0000FF"+ @checknum2 + "^000000";
+mes "^C0C0C04th: ^000000^0000FF"+ @checknum3 + "^000000";
+mes "^C0C0C05th: ^000000^0000FF"+ @checknum4 + "^000000";
+mes "^C0C0C06th: ^000000^0000FF"+ @checknum5 + "^000000";
+mes "^C0C0C07th: ^000000^0000FF"+ @checknum6 + "^000000";
+mes "^C0C0C08th: ^000000^0000FF"+ @checknum7 + "^000000";
+mes "^C0C0C09th: ^000000^0000FF"+ @checknum8 + "^000000";
+mes "^C0C0C010th: ^000000^0000FF"+ @checknum9 + "^000000";
+input @myinput;
+if (@myinput == @checknum8) goto L_Complete;
+if (@questionnum != 99) goto CONTINUED;
+myquestion9:
+set @answer,@checknum9;
+mes "What Is The Tenth Number?";
+mes "^C0C0C01st: ^000000^0000FF"+ @checknum0 + "^000000";
+mes "^C0C0C02nd: ^000000^0000FF"+ @checknum1 + "^000000";
+mes "^C0C0C03rd: ^000000^0000FF"+ @checknum2 + "^000000";
+mes "^C0C0C04th: ^000000^0000FF"+ @checknum3 + "^000000";
+mes "^C0C0C05th: ^000000^0000FF"+ @checknum4 + "^000000";
+mes "^C0C0C06th: ^000000^0000FF"+ @checknum5 + "^000000";
+mes "^C0C0C07th: ^000000^0000FF"+ @checknum6 + "^000000";
+mes "^C0C0C08th: ^000000^0000FF"+ @checknum7 + "^000000";
+mes "^C0C0C09th: ^000000^0000FF"+ @checknum8 + "^000000";
+mes "^C0C0C010th: ^000000^0000FF"+ @checknum9 + "^000000";
+input @myinput;
+if (@myinput == @checknum9) goto L_Complete;
+if (@questionnum != 99) goto CONTINUED;
+// ----------------------------------------
+CONTINUED:
+// ----------------------------------------
+next;
+mes @npcname$;
+mes "Incorrect";
+close;
+// ----------------------------------------
+L_Complete:
+next;
+mes @npcname$;
+mes "Correct!";
+mes "Alright, one more question and you can go play.";
+mes "This is the English language part of the test so pay close attention to grammar.";
+next;
+set @answer2, 0;
+set @questionnum2, rand (0,9);
+// ----------------------------------------
+set @npcname$, "[Starter Test]";
+mes @npcname$;
+// ----------------------------------------
+if (@questionnum2 == 0) goto myquestion20;
+if (@questionnum2 == 1) goto myquestion21;
+if (@questionnum2 == 2) goto myquestion22;
+if (@questionnum2 == 3) goto myquestion23;
+if (@questionnum2 == 4) goto myquestion24;
+if (@questionnum2 == 5) goto myquestion25;
+if (@questionnum2 == 6) goto myquestion26;
+if (@questionnum2 == 7) goto myquestion27;
+if (@questionnum2 == 8) goto myquestion28;
+if (@questionnum2 == 9) goto myquestion29;
+// ----------------------------------------
+myquestion20:
+mes "Fill in the blank:";
+mes "There are ______ hotels in the desert.";
+mes "^FF33001 - ^000000^FF0000"+ "best" + "^000000";
+mes "^FF33002 - ^000000^FF0000"+ "not many" + "^000000";
+mes "^FF33003 - ^000000^FF0000"+ "this" + "^000000";
+mes "^FF33004 - ^000000^FF0000"+ "little" + "^000000";
+mes "^FF33005 - ^000000^FF0000"+ "none" + "^000000";
+input @myinput2;
+if (@myinput2 == 2) goto L_Complete2;
+if (@questionnum2 != 99) goto CONTINUED2;
+
+myquestion21:
+mes "Choose the CORRECT RESPONSE:";
+mes "Is it hot or cold in August?";
+mes "^FF33001 - ^000000^FF0000"+ "In August is hot." + "^000000";
+mes "^FF33002 - ^000000^FF0000"+ "It is hot in August." + "^000000";
+mes "^FF33003 - ^000000^FF0000"+ "It makes very hot in August." + "^000000";
+mes "^FF33004 - ^000000^FF0000"+ "It hot in August." + "^000000";
+mes "^FF33005 - ^000000^FF0000"+ "It is more hottest is July." + "^000000";
+input @myinput2;
+if (@myinput2 == 2) goto L_Complete2;
+if (@questionnum2 != 99) goto CONTINUED2;
+
+myquestion22:
+mes "Choose the CORRECT RESPONSE:";
+mes "Aren't they coming with us to the party?";
+mes "^FF33001 - ^000000^FF0000"+ "No, they're not coming." + "^000000";
+mes "^FF33002 - ^000000^FF0000"+ "No, they are going with she." + "^000000";
+mes "^FF33003 - ^000000^FF0000"+ "No, they are coming in the party later." + "^000000";
+mes "^FF33004 - ^000000^FF0000"+ "Yes, they is coming with us." + "^000000";
+mes "^FF33005 - ^000000^FF0000"+ "Yes, there coming." + "^000000";
+input @myinput2;
+if (@myinput2 == 1) goto L_Complete2;
+if (@questionnum2 != 99) goto CONTINUED2;
+
+myquestion23:
+mes "Choose the CORRECT RESPONSE:";
+mes "(Jack is causing trouble)";
+mes "^FF33001 - ^000000^FF0000"+ "Stop to make trouble Jack!" + "^000000";
+mes "^FF33002 - ^000000^FF0000"+ "Is to be good Jack!" + "^000000";
+mes "^FF33003 - ^000000^FF0000"+ "Not to make trouble Jack!" + "^000000";
+mes "^FF33004 - ^000000^FF0000"+ "Be good Jack!" + "^000000";
+mes "^FF33005 - ^000000^FF0000"+ "You are good Jack!" + "^000000";
+input @myinput2;
+if (@myinput2 == 4) goto L_Complete2;
+if (@questionnum2 != 99) goto CONTINUED2;
+
+myquestion24:
+mes "Fill in the blank:";
+mes "There are ______ hotels in the desert.";
+mes "^FF33001 - ^000000^FF0000"+ "best" + "^000000";
+mes "^FF33002 - ^000000^FF0000"+ "not many" + "^000000";
+mes "^FF33003 - ^000000^FF0000"+ "this" + "^000000";
+mes "^FF33004 - ^000000^FF0000"+ "little" + "^000000";
+mes "^FF33005 - ^000000^FF0000"+ "none" + "^000000";
+input @myinput2;
+if (@myinput2 == 2) goto L_Complete2;
+if (@questionnum2 != 99) goto CONTINUED2;
+
+myquestion25:
+mes "Fill in the blank:";
+mes "There are ______ hotels in the desert.";
+mes "^FF33001 - ^000000^FF0000"+ "best" + "^000000";
+mes "^FF33002 - ^000000^FF0000"+ "not many" + "^000000";
+mes "^FF33003 - ^000000^FF0000"+ "this" + "^000000";
+mes "^FF33004 - ^000000^FF0000"+ "little" + "^000000";
+mes "^FF33005 - ^000000^FF0000"+ "none" + "^000000";
+input @myinput2;
+if (@myinput2 == 2) goto L_Complete2;
+if (@questionnum2 != 99) goto CONTINUED2;
+
+myquestion26:
+mes "Fill in the blank:";
+mes "Anna told me a very ______ story.";
+mes "^FF33001 - ^000000^FF0000"+ "interestingly" + "^000000";
+mes "^FF33002 - ^000000^FF0000"+ "interest" + "^000000";
+mes "^FF33003 - ^000000^FF0000"+ "interests" + "^000000";
+mes "^FF33004 - ^000000^FF0000"+ "interested" + "^000000";
+mes "^FF33005 - ^000000^FF0000"+ "interesting" + "^000000";
+input @myinput2;
+if (@myinput2 == 5) goto L_Complete2;
+if (@questionnum2 != 99) goto CONTINUED2;
+
+myquestion27:
+mes "Choose the CORRECT RESPONSE:";
+mes "Is it hot or cold in August?";
+mes "^FF33001 - ^000000^FF0000"+ "In August is hot." + "^000000";
+mes "^FF33002 - ^000000^FF0000"+ "It makes very hot in August." + "^000000";
+mes "^FF33003 - ^000000^FF0000"+ "It hot in August." + "^000000";
+mes "^FF33004 - ^000000^FF0000"+ "It is hot in August." + "^000000";
+mes "^FF33005 - ^000000^FF0000"+ "It is more hottest is July." + "^000000";
+input @myinput2;
+if (@myinput2 == 4) goto L_Complete2;
+if (@questionnum2 != 99) goto CONTINUED2;
+
+myquestion28:
+mes "Fill in the blank:";
+mes "The glass ______ water is on the table.";
+mes "^FF33001 - ^000000^FF0000"+ "to" + "^000000";
+mes "^FF33002 - ^000000^FF0000"+ "of" + "^000000";
+mes "^FF33003 - ^000000^FF0000"+ "with" + "^000000";
+mes "^FF33004 - ^000000^FF0000"+ "a" + "^000000";
+mes "^FF33005 - ^000000^FF0000"+ "inside" + "^000000";
+mes "^FF33006 - ^000000^FF0000"+ "can" + "^000000";
+mes "^FF33007 - ^000000^FF0000"+ "make" + "^000000";
+input @myinput2;
+if (@myinput2 == 2) goto L_Complete2;
+if (@questionnum2 != 99) goto CONTINUED2;
+
+myquestion29:
+mes "Fill in the blank:";
+mes "Once upon a time, ______ three bears who lived in a forest in a little red house near a brook.";
+mes "^FF33001 - ^000000^FF0000"+ "were" + "^000000";
+mes "^FF33002 - ^000000^FF0000"+ "was" + "^000000";
+mes "^FF33003 - ^000000^FF0000"+ "are" + "^000000";
+mes "^FF33004 - ^000000^FF0000"+ "there were" + "^000000";
+mes "^FF33005 - ^000000^FF0000"+ "was there" + "^000000";
+mes "^FF33006 - ^000000^FF0000"+ "had they" + "^000000";
+mes "^FF33007 - ^000000^FF0000"+ "they been" + "^000000";
+input @myinput2;
+if (@myinput2 == 4) goto L_Complete2;
+if (@questionnum2 != 99) goto CONTINUED2;
+
+// ----------------------------------------
+CONTINUED2:
+// ----------------------------------------
+next;
+mes @npcname$;
+mes "Incorrect";
+close;
+// ----------------------------------------
+L_Complete2:
+next;
+mes @npcname$;
+mes "Correct!";
+mes "That wasn't so hard, was it?";
+mes "Ok then, off you go!  Have fun!";
+next;
+savepoint "pvp_n_1-1.gat",93,157;
+warp "pvp_n_1-1.gat",	93,	157;	end;
+close;
+}
